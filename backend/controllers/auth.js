@@ -1,11 +1,11 @@
-import AuthService from '../services/auth.js';
+import authService from '../services/auth.js';
 
 export const login = (req, res) => {
-  const response = AuthService.login();
+  const response = authService.login();
   res.json({ message: response });
 };
 
 export const logout = (req, res) => {
-  const response = AuthService.logout();
+  const response = authService.logout();
   res.json({ message: response });
 };
