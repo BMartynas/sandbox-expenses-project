@@ -10,6 +10,7 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    "import/extensions": ["never"],
     "rules": {
         "no-console": "off",
         "linebreak-style": "off"
