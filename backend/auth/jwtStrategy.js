@@ -10,10 +10,8 @@ const options = {
 
 const jwtStrategy = new Strategy(options, (payload, done) => {
   const user = usersService.getUserByEmail(payload.email);
-  if (user) {
-    return done(null, user);
-  }
-  return done(null, false);
+
+  return done(null, user || false);
 });
 
 passport.use(jwtStrategy);

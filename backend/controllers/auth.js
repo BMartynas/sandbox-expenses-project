@@ -6,7 +6,7 @@ export const login = (req, res) => {
   const token = authService.login(email, password);
 
   if (token) {
-    res.status(200).json({ token: `Bearer ${token}` });
+    res.status(200).json({ token });
   }
   res.status(401).json({ message: 'Invalid crediantials!' });
 };
