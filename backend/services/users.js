@@ -7,12 +7,11 @@ export default class UsersService {
     return user;
   }
 
-  static register(user) {
+  static register({ password, ...rest }) {
     let newUser = {
       id: Math.random(),
-      email: user.email,
-      password: bcrypt.hashSync(user.password, 10),
-      role: user.role,
+      password: bcrypt.hashSync(password, 10),
+      ...rest,
     };
     mockedUsers.push(newUser);
 

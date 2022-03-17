@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import authService from '../services/auth.js';
 
 export const login = (req, res) => {
@@ -6,13 +7,15 @@ export const login = (req, res) => {
   const token = authService.login(email, password);
 
   if (token) {
-    res.status(200).json({ token });
+    res.status(StatusCodes.OK).json({ token });
   } else {
-    res.status(401).json({ message: 'Invalid crediantials!' });
+    res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: 'Invalid crediantials!' });
   }
 };
 
 export const logout = (req, res) => {
   const response = authService.logout();
-  res.json({ message: response });
+  res.status(StatusCodes.OK).json({ message: response });
 };
