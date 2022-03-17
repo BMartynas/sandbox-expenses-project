@@ -7,8 +7,9 @@ export const login = (req, res) => {
 
   if (token) {
     res.status(200).json({ token });
+  } else {
+    res.status(401).json({ message: 'Invalid crediantials!' });
   }
-  res.status(401).json({ message: 'Invalid crediantials!' });
 };
 
 export const logout = (req, res) => {
