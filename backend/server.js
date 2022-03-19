@@ -8,9 +8,12 @@ import expensesRoutes from './routes/expenses.js';
 import authRoutes from './routes/auth.js';
 import usersRoutes from './routes/users.js';
 import { jwtAuth } from './auth/jwtStrategy.js';
+import connectToDB from './configs/db.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+connectToDB();
 
 app.use(cors());
 app.use(express.json());
