@@ -1,26 +1,31 @@
-import mockedAccounts from '../mockData/accounts.js';
+import Account from '../models/accounts.js';
 
 export default class AccountsService {
-  static getAccounts() {
-    return mockedAccounts;
+  static getAccounts(userId) {
+    const accounts = Account.find({ userId });
+    return accounts;
   }
 
-  static getAccount(id) {
-    const account = mockedAccounts.find((acc) => acc.id === id);
+  static getAccount(accountId, userId) {
+    const account = Account.findOne({ _id: accountId, userId });
     return account;
   }
 
-  static createAccount(newAccount) {
-    return mockedAccounts.push(newAccount);
+  static createAccount(accountData, userId) {
+    const createdAccount = Account.create({ ...accountData, userId });
+    return createdAccount;
   }
 
-  static updateAccount(id, newTitle) {
-    const account = mockedAccounts.find((acc) => acc.id === id);
-    account.title = newTitle;
-    return account;
+  static updateAccount(accountId, newAccountData, userId) {
+    const updatedAccount = Account.findOneAndUpdate(
+      { _id: accountId, userId },
+      newAccountData,
+      { new: true }
+    );
+    return updatedAccount;
   }
 
-  static removeAccount(id) {
-    return mockedAccounts.filter((acc) => acc.id != id);
+  static removeAccount(accountId, userId) {
+    return Account.findOneAndDelete({ _id: accountId, userId });
   }
 }

@@ -8,9 +8,8 @@ const options = {
   secretOrKey: process.env.JWT_SECRET,
 };
 
-const jwtStrategy = new Strategy(options, (payload, done) => {
-  const user = usersService.getUserByEmail(payload.email);
-
+const jwtStrategy = new Strategy(options, async (payload, done) => {
+  const user = await usersService.getUserByEmail(payload.email);
   return done(null, user || false);
 });
 

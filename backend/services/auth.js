@@ -4,8 +4,8 @@ import 'dotenv/config';
 import usersService from '../services/users.js';
 
 export default class AuthService {
-  static login(email, password) {
-    const user = usersService.getUserByEmail(email);
+  static async login(email, password) {
+    const user = await usersService.getUserByEmail(email);
 
     if (user && bcrypt.compareSync(password, user.password)) {
       const payload = {

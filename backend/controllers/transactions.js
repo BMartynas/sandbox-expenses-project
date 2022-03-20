@@ -1,10 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
-import categoriesService from '../services/categories.js';
+import transactionsService from '../services/transactions.js';
 
 export const getAll = async (req, res) => {
   try {
-    const categories = await categoriesService.getCategories(req.user.id);
-    res.status(StatusCodes.OK).json(categories);
+    const transactions = await transactionsService.getTransactions(
+      req.params.accountId
+    );
+    res.status(StatusCodes.OK).json(transactions);
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -14,11 +16,8 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const category = await categoriesService.getCategory(
-      req.params.id,
-      req.user.id
-    );
-    res.status(StatusCodes.OK).json(category);
+    const transaction = await transactionsService.getTransaction(req.params.id);
+    res.status(StatusCodes.OK).json(transaction);
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -28,11 +27,11 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const category = await categoriesService.createCategory(
+    const transaction = await transactionsService.createTransaction(
       req.body,
-      req.user.id
+      req.params.accountId
     );
-    res.status(StatusCodes.CREATED).json(category);
+    res.status(StatusCodes.CREATED).json(transaction);
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -42,12 +41,11 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const category = await categoriesService.updateCategory(
+    const transaction = await transactionsService.updateTransaction(
       req.params.id,
-      req.body,
-      req.user.id
+      req.body
     );
-    res.status(StatusCodes.OK).json(category);
+    res.status(StatusCodes.OK).json(transaction);
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -57,11 +55,10 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const category = await categoriesService.removeCategory(
-      req.params.id,
-      req.user.id
+    const transaction = await transactionsService.removeTransaction(
+      req.params.id
     );
-    res.status(StatusCodes.OK).json(category);
+    res.status(StatusCodes.OK).json(transaction);
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)

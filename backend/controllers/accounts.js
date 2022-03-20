@@ -1,27 +1,67 @@
 import { StatusCodes } from 'http-status-codes';
 import accountsService from '../services/accounts.js';
 
-export const getAll = (req, res) => {
-  const accounts = accountsService.getAccounts();
-  res.status(StatusCodes.OK).json(accounts);
+export const getAll = async (req, res) => {
+  try {
+    const accounts = await accountsService.getAccounts(req.user.id);
+    res.status(StatusCodes.OK).json(accounts);
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+  }
 };
 
-export const getOne = (req, res) => {
-  const account = accountsService.getAccount(req.params.id);
-  res.status(StatusCodes.CREATED).json(account);
+export const getOne = async (req, res) => {
+  try {
+    const account = await accountsService.getAccount(
+      req.params.id,
+      req.user.id
+    );
+    res.status(StatusCodes.OK).json(account);
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+  }
 };
 
-export const create = (req, res) => {
-  const accounts = accountsService.createAccount(req.body);
-  res.status(StatusCodes.OK).json(accounts);
+export const create = async (req, res) => {
+  try {
+    const account = await accountsService.createAccount(req.body, req.user.id);
+    res.status(StatusCodes.CREATED).json(account);
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+  }
 };
 
-export const update = (req, res) => {
-  const accounts = accountsService.updateAccount(req.params.id, req.body.title);
-  res.status(StatusCodes.OK).json(accounts);
+export const update = async (req, res) => {
+  try {
+    const account = await accountsService.updateAccount(
+      req.params.id,
+      req.body,
+      req.user.id
+    );
+    res.status(StatusCodes.OK).json(account);
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+  }
 };
 
-export const remove = (req, res) => {
-  const accounts = accountsService.removeAccount(req.params.id);
-  res.status(StatusCodes.OK).json(accounts);
+export const remove = async (req, res) => {
+  try {
+    const account = await accountsService.removeAccount(
+      req.params.id,
+      req.user.id
+    );
+    res.status(StatusCodes.OK).json(account);
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+  }
 };
