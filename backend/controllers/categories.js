@@ -44,8 +44,7 @@ export const update = async (req, res) => {
   try {
     const category = await categoriesService.updateCategory(
       req.params.id,
-      req.body,
-      req.user.id
+      req.body
     );
     res.status(StatusCodes.OK).json(category);
   } catch (error) {

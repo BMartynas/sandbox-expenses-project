@@ -16,9 +16,9 @@ export default class CategoriesService {
     return createdCategory;
   }
 
-  static updateCategory(categoryId, newCategoryData, userId) {
+  static updateCategory(categoryId, newCategoryData) {
     const updatedCategory = Category.findOneAndUpdate(
-      { _id: categoryId, userId },
+      { _id: categoryId },
       newCategoryData,
       { new: true }
     );
