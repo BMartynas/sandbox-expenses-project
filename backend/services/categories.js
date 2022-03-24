@@ -1,26 +1,35 @@
-import mockedCategories from '../mockData/categories.js';
+import Category from '../models/categories.js';
 
 export default class CategoriesService {
-  static getCategories() {
-    return mockedCategories;
+  static async getCategories(userId) {
+    const categories = await Category.find({ userId });
+    return categories;
   }
 
-  static getCategory(id) {
-    const category = mockedCategories.find((cat) => cat.id === id);
+  static async getCategory(categoryId, userId) {
+    const category = await Category.findOne({ _id: categoryId, userId });
     return category;
   }
 
-  static createCategory(newCategory) {
-    return mockedCategories.push(newCategory);
+  static async createCategory(categoryData, userId) {
+    const createdCategory = await Category.create({ ...categoryData, userId });
+    return createdCategory;
   }
 
-  static updateCategory(id, newTitle) {
-    const category = mockedCategories.find((cat) => cat.id === id);
-    category.title = newTitle;
-    return category;
+  static async updateCategory(categoryId, newCategoryData) {
+    const updatedCategory = await Category.findOneAndUpdate(
+      { _id: categoryId },
+      newCategoryData,
+      { new: true }
+    );
+    return updatedCategory;
   }
 
-  static removeCategory(id) {
-    return mockedCategories.filter((cat) => cat.id != id);
+  static async removeCategory(categoryId, userId) {
+    const deletedCategory = await Category.findOneAndDelete({
+      _id: categoryId,
+      userId,
+    });
+    return deletedCategory;
   }
 }

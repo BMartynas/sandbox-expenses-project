@@ -1,17 +1,23 @@
 import { StatusCodes } from 'http-status-codes';
 import authService from '../services/auth.js';
 
-export const login = (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const token = authService.login(email, password);
+  try {
+    const token = await authService.login(email, password);
 
-  if (token) {
-    res.status(StatusCodes.OK).json({ token });
-  } else {
+    if (token) {
+      res.status(StatusCodes.OK).json({ token });
+    } else {
+      res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ message: 'Invalid crediantials!' });
+    }
+  } catch (error) {
     res
-      .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: 'Invalid crediantials!' });
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
   }
 };
 

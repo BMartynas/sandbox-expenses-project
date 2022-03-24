@@ -1,11 +1,13 @@
 import { StatusCodes } from 'http-status-codes';
-import accountsService from '../services/accounts.js';
+import transactionsService from '../services/transactions.js';
 import { handleError } from '../utils/errors.js';
 
 export const getAll = async (req, res) => {
   try {
-    const accounts = await accountsService.getAccounts(req.user.id);
-    res.status(StatusCodes.OK).json(accounts);
+    const transactions = await transactionsService.getTransactions(
+      req.params.accountId
+    );
+    res.status(StatusCodes.OK).json(transactions);
   } catch (error) {
     handleError(res, error, StatusCodes.NOT_FOUND);
   }
@@ -13,11 +15,8 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const account = await accountsService.getAccount(
-      req.params.id,
-      req.user.id
-    );
-    res.status(StatusCodes.OK).json(account);
+    const transaction = await transactionsService.getTransaction(req.params.id);
+    res.status(StatusCodes.OK).json(transaction);
   } catch (error) {
     handleError(res, error, StatusCodes.NOT_FOUND);
   }
@@ -25,8 +24,11 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const account = await accountsService.createAccount(req.body, req.user.id);
-    res.status(StatusCodes.CREATED).json(account);
+    const transaction = await transactionsService.createTransaction(
+      req.body,
+      req.params.accountId
+    );
+    res.status(StatusCodes.CREATED).json(transaction);
   } catch (error) {
     handleError(res, error, StatusCodes.INTERNAL_SERVER_ERROR);
   }
@@ -34,12 +36,11 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const account = await accountsService.updateAccount(
+    const transaction = await transactionsService.updateTransaction(
       req.params.id,
-      req.body,
-      req.user.id
+      req.body
     );
-    res.status(StatusCodes.OK).json(account);
+    res.status(StatusCodes.OK).json(transaction);
   } catch (error) {
     handleError(res, error, StatusCodes.INTERNAL_SERVER_ERROR);
   }
@@ -47,11 +48,10 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const account = await accountsService.removeAccount(
-      req.params.id,
-      req.user.id
+    const transaction = await transactionsService.removeTransaction(
+      req.params.id
     );
-    res.status(StatusCodes.OK).json(account);
+    res.status(StatusCodes.OK).json(transaction);
   } catch (error) {
     handleError(res, error, StatusCodes.INTERNAL_SERVER_ERROR);
   }
