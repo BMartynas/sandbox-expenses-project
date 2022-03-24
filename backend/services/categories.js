@@ -1,23 +1,23 @@
 import Category from '../models/categories.js';
 
 export default class CategoriesService {
-  static getCategories(userId) {
-    const categories = Category.find({ userId });
+  static async getCategories(userId) {
+    const categories = await Category.find({ userId });
     return categories;
   }
 
-  static getCategory(categoryId, userId) {
-    const category = Category.findOne({ _id: categoryId, userId });
+  static async getCategory(categoryId, userId) {
+    const category = await Category.findOne({ _id: categoryId, userId });
     return category;
   }
 
-  static createCategory(categoryData, userId) {
-    const createdCategory = Category.create({ ...categoryData, userId });
+  static async createCategory(categoryData, userId) {
+    const createdCategory = await Category.create({ ...categoryData, userId });
     return createdCategory;
   }
 
-  static updateCategory(categoryId, newCategoryData) {
-    const updatedCategory = Category.findOneAndUpdate(
+  static async updateCategory(categoryId, newCategoryData) {
+    const updatedCategory = await Category.findOneAndUpdate(
       { _id: categoryId },
       newCategoryData,
       { new: true }
@@ -25,7 +25,11 @@ export default class CategoriesService {
     return updatedCategory;
   }
 
-  static removeCategory(categoryId, userId) {
-    return Category.findOneAndDelete({ _id: categoryId, userId });
+  static async removeCategory(categoryId, userId) {
+    const deletedCategory = await Category.findOneAndDelete({
+      _id: categoryId,
+      userId,
+    });
+    return deletedCategory;
   }
 }

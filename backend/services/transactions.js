@@ -1,26 +1,26 @@
 import Transaction from '../models/transactions.js';
 
 export default class TransactionsService {
-  static getTransactions(accountId) {
-    const transactions = Transaction.find({ accountId });
+  static async getTransactions(accountId) {
+    const transactions = await Transaction.find({ accountId });
     return transactions;
   }
 
-  static getTransaction(transactionId) {
-    const transaction = Transaction.findOne({ _id: transactionId });
+  static async getTransaction(transactionId) {
+    const transaction = await Transaction.findOne({ _id: transactionId });
     return transaction;
   }
 
-  static createTransaction(transactionData, accountId) {
-    const createdTransaction = Transaction.create({
+  static async createTransaction(transactionData, accountId) {
+    const createdTransaction = await Transaction.create({
       ...transactionData,
       accountId,
     });
     return createdTransaction;
   }
 
-  static updateTransaction(transactionId, newTransactionData) {
-    const updatedTransaction = Transaction.findOneAndUpdate(
+  static async updateTransaction(transactionId, newTransactionData) {
+    const updatedTransaction = await Transaction.findOneAndUpdate(
       { _id: transactionId },
       newTransactionData,
       { new: true }
@@ -28,7 +28,10 @@ export default class TransactionsService {
     return updatedTransaction;
   }
 
-  static removeTransaction(transactionId) {
-    return Transaction.findOneAndDelete({ _id: transactionId });
+  static async removeTransaction(transactionId) {
+    const deletedTransaction = await Transaction.findOneAndDelete({
+      _id: transactionId,
+    });
+    return deletedTransaction;
   }
 }
