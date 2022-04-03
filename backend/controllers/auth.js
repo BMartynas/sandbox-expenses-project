@@ -8,7 +8,9 @@ export const login = async (req, res) => {
     const token = await authService.login(email, password);
 
     if (token) {
-      res.status(StatusCodes.OK).json({ token });
+      res
+        .status(StatusCodes.OK)
+        .json({ token, expiresIn: process.env.JWT_EXPIRES_IN });
     } else {
       res
         .status(StatusCodes.UNAUTHORIZED)
