@@ -1,0 +1,70 @@
+@use "src/variables" as var;
+
+.container {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../../assets/images/piggybank.webp");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__wrapper {
+        width: 33rem;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 3.8rem;
+        padding-bottom: 4.7rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    &__row {
+      width: 20rem;
+    }
+  
+    &__login-button {
+        background-color: var.$button-primary;
+        width: 100%;
+        box-shadow: none;
+        height: 3.43rem;
+        font-size: 1.125rem;
+        border-radius: 10px;
+        margin-top: 2.125rem;
+    }
+
+    &__error-message {
+        color: red;
+        align-self: flex-start;
+        margin-top: 0.4rem;
+    }
+
+    &__bad-crediantials-error-message {
+        margin-top: 1rem;
+        color: red;
+    }
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    height: 3.43rem;
+    font-size: 1.125rem;
+    line-height: 1.3rem;
+    color: #474747;
+  }
+
+:host ::ng-deep .mat-form-field-wrapper{
+    margin: 2.125rem 0 0 0 !important;
+    padding: 0;
+}

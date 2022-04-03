@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="container__wrapper">
+            <h1>Budgetify</h1>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+                <mat-form-field class="auth-form__row" appearance="outline" hideRequiredMarker>
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email">
+                </mat-form-field>
+                <span *ngIf="loginForm.controls['email'].errors?.['required'] && loginForm.controls['email'].touched" class="auth-form__error-message">
+                    Required field is empty
+                </span> 
+                <span *ngIf="loginForm.controls['email'].errors?.['pattern'] && loginForm.controls['email'].touched" class="auth-form__error-message">
+                    Please enter a valid email address
+                </span> 
+                <mat-form-field class="auth-form__row" appearance="outline" hideRequiredMarker>
+                    <mat-label>Password</mat-label>
+                    <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword" type="button">
+                        <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                </mat-form-field>
+                <span *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched" class="auth-form__error-message">
+                    Required field is empty
+                </span> 
+                <span class="auth-form__bad-crediantials-error-message" *ngIf="errorMessage">{{errorMessage}}</span>
+                <button [disabled]="loginForm.invalid" class="auth-form__login-button" type="submit" mat-raised-button>Login</button>
+            </form>
+    </div>
+</div>
