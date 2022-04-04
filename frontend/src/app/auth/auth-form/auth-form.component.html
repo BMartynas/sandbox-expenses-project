@@ -6,12 +6,9 @@
                     <mat-label>Email</mat-label>
                     <input matInput type="email" formControlName="email">
                 </mat-form-field>
-                <span *ngIf="loginForm.controls['email'].errors?.['required'] && loginForm.controls['email'].touched" class="auth-form__error-message">
-                    Required field is empty
-                </span> 
-                <span *ngIf="loginForm.controls['email'].errors?.['pattern'] && loginForm.controls['email'].touched" class="auth-form__error-message">
-                    Please enter a valid email address
-                </span> 
+                <span [ngClass]="loginForm.controls['email'].errors && loginForm.controls['email'].touched ? 'auth-form__error-show auth-form__error-message' : 'auth-form__error-hidden auth-form__error-message'">
+                    {{loginForm.controls['email'].errors?.['required'] ? 'Required field is empty' : 'Please enter a valid email address'}}
+                </span>  
                 <mat-form-field class="auth-form__row" appearance="outline" hideRequiredMarker>
                     <mat-label>Password</mat-label>
                     <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password">
@@ -19,7 +16,7 @@
                         <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                       </button>
                 </mat-form-field>
-                <span *ngIf="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched" class="auth-form__error-message">
+                <span [ngClass]="loginForm.controls['password'].errors?.['required'] && loginForm.controls['password'].touched ? 'auth-form__error-show auth-form__error-message' : 'auth-form__error-hidden auth-form__error-message'">
                     Required field is empty
                 </span> 
                 <span class="auth-form__bad-crediantials-error-message" *ngIf="errorMessage">{{errorMessage}}</span>
