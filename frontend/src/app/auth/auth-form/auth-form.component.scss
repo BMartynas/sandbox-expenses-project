@@ -1,0 +1,77 @@
+@use "src/colors" as colors;
+
+.container {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../../assets/images/piggybank.webp");
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__wrapper {
+        width: 33rem;
+        background: colors.$login-wrapper-background;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 3.8rem;
+        padding-bottom: 4.7rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 2.3rem;
+    }
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    &__row {
+      width: 20rem;
+    }
+  
+    &__login-button {
+        background-color: colors.$button-primary;
+        width: 100%;
+        box-shadow: none;
+        height: 3.43rem;
+        font-size: 1.125rem;
+        border-radius: 10px;
+        margin-top: 0.9rem;
+    }
+
+    &__error-message {
+        color: colors.$error;
+        align-self: flex-start;
+        margin-top: 0.4rem;
+    }
+
+    &__bad-crediantials-error-message {
+        color: colors.$error;
+    }
+
+    &__error-show{
+        visibility: visible;
+    }
+    
+    &__error-hidden{
+        visibility: hidden;
+    }
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: colors.$form-field-background;
+    height: 3.43rem;
+    font-size: 1.125rem;
+    line-height: 1.3rem;
+    color: colors.$form-input;
+  }
+
+:host ::ng-deep .mat-form-field-wrapper{
+    padding: 0;
+}
