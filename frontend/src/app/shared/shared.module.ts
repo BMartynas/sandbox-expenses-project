@@ -6,9 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { AddButtonComponent } from './add-button/add-button.component';
+import { MatCardModule } from '@angular/material/card';
+import { TransactionButtonComponent } from './transaction-button/transaction-button.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [AddButtonComponent, TransactionButtonComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -17,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
+    MatCardModule,
   ],
   exports: [
     MatButtonModule,
@@ -25,6 +29,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
+    AddButtonComponent,
+    TransactionButtonComponent,
+    MatCardModule,
   ],
 })
 export class SharedModule {}

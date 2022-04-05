@@ -1,0 +1,24 @@
+<mat-card class="transaction">
+    <div>
+        <span class="transaction__category-title">{{transaction.category.title}}</span>
+    </div>
+    <div class="transaction__info-wrapper">
+        <div class="transaction__main-info">
+            <mat-card-content class="transaction__title">
+                {{transaction.title}}
+            </mat-card-content>
+            <mat-card-content [ngClass]="transaction.type === 'income' ? 'income-amount' : 'expense-amount'">
+                {{transaction.type === 'income' ? '' : '-'}}{{transaction.amount}}
+            </mat-card-content>
+        </div>
+        <div class="transaction__info">
+            <mat-icon [ngClass]="transaction.type === 'income' ? 'income-icon' : 'expense-icon'">
+                {{ transaction.type === "income" ? "arrow_downward" : "arrow_upward"}}
+            </mat-icon>
+            <div class="transaction__info-text">
+                {{ transaction.type === "income" ? "Income" : "Expenses"}} - {{ transaction.dateOfTransaction | date:'d.MM.yyyy'}}
+            </div>
+        </div>
+    </div>
+    
+</mat-card>

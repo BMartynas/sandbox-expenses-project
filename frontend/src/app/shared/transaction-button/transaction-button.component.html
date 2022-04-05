@@ -1,0 +1,6 @@
+<button class="transaction-button">
+    <mat-icon [ngClass]="type === 'Income' ? 'income-icon' : 'expense-icon'" class="transaction-button__icon">
+        {{ type === "Income" ? "arrow_downward" : "arrow_upward"}}
+    </mat-icon>
+    <span class="transaction-button__text">{{ type }}</span>
+</button>

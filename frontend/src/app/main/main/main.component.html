@@ -1,0 +1,24 @@
+<main class="main">
+    <div class="main__accounts">
+        <app-account *ngFor="let account of accounts" [account]="account"></app-account>
+    </div>
+
+    <div class="main__transactions">
+        <app-transaction *ngFor="let transaction of transactionsService.transactions" [transaction]="transaction"></app-transaction>
+    </div>
+
+    <div class="main__buttons">
+        <app-transaction-button 
+            type="Income">
+        </app-transaction-button>
+        <app-transaction-button 
+            type="Expenses">
+        </app-transaction-button>
+        <app-add-button
+            text="Add Transaction"
+        ></app-add-button>
+        <app-add-button
+            text="Add Account"
+        ></app-add-button>
+    </div>
+</main>

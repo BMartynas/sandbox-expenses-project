@@ -1,7 +1,11 @@
+@use "src/colors" as colors;
+
 .not-found-page {
     display: flex;
     justify-content: center;
     padding-top: 10rem;
+    background-color: colors.$background-primary;
+    height: 100%;
 
     h1 {
         font-size: 5rem;

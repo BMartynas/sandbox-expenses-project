@@ -1,0 +1,42 @@
+@use "src/colors" as colors;
+
+.account {
+    display: flex;
+    justify-content: space-between;
+    width: 26rem;
+    height: 11.5rem;
+    margin-bottom: 3.1rem;
+    background: linear-gradient( 120deg, colors.$account-gradient-start 0%, colors.$account-gradient-finish);
+    opacity: 0.4;
+    cursor: pointer;
+    border-radius: 0.625rem;
+    padding: 1.331rem 1.188rem 0 1.438rem;
+
+    &__name {
+        font-size: 2rem;
+        color: colors.$white;
+        margin-bottom: 4rem;
+    }
+
+    &__amount {
+        font-size: 3.313rem;
+        color: colors.$account-amount;
+    }
+
+    &__currency {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        color: colors.$currency;
+        width: 5.625rem;
+        height: 5.625rem;
+        border-radius: 50%;
+        font-size: 4rem;
+    }
+}
+
+.active {
+    opacity: 1;
+    filter: drop-shadow(0.3125rem 0.625rem 1.25rem rgba(0, 0, 0, 0.25));
+}

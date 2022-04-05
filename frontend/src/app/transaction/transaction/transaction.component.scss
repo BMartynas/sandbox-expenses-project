@@ -1,0 +1,88 @@
+@use "src/colors" as colors;
+
+.transaction {
+    display: flex;
+    width: 38.5rem;
+    box-shadow: none;
+    background: colors.$transaction-background;
+    margin-bottom: 1.72rem;
+    border-radius: 0.625rem;
+    cursor: pointer;
+
+    &__title {
+        color: colors.$text-primary;
+        font-size: 1.75rem;
+        margin-bottom: 0.438rem;
+    }
+
+    &__category-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10rem;
+        height: 4rem;
+        border-radius:  0.625rem;
+        background: colors.$button-background;
+        font-weight: 700;
+        font-size: 20px;
+        text-align: center;
+        color: colors.$text-primary;
+        padding: 0 0.2rem;
+    }
+
+    &__info-wrapper {
+        width: 100%;
+        margin-left: 1.313rem;
+    }
+
+    &__info {
+        display: flex;
+    }
+
+    &__info-text {
+        display: flex;
+        align-items: center;
+        color: colors.$text-primary;
+        font-size: 0.938rem;
+        height: 1.875rem;
+        padding-left: 0.313rem;
+    }
+
+    &__main-info {
+        display: flex;
+        justify-content: space-between;
+    }
+
+}
+
+.income-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: colors.$income;
+    color: colors.$white;
+    border-radius: 50%;
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
+.expense-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: colors.$expense;
+    color: colors.$white;
+    border-radius: 50%;
+    width: 1.875rem;
+    height: 1.875rem;
+}
+
+.income-amount {
+    color: colors.$income;
+    font-size: 1.375rem;
+}
+
+.expense-amount {
+    color: colors.$expense;
+    font-size: 1.375rem;
+}
