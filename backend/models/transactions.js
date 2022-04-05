@@ -15,10 +15,10 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Title is required!'],
   },
-  categoryId: {
+  category: {
     type: mongoose.ObjectId,
     ref: 'Category',
-    required: [true, 'Category id is required!'],
+    required: [true, 'Category is required!'],
   },
   description: {
     type: String,
