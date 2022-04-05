@@ -1,0 +1,30 @@
+@use "src/colors" as colors;
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2.625rem 0 3.25rem;
+
+    &__logo-link {
+        color: colors.$logo;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    &__link {
+        color: colors.$text-primary;
+        margin: 0 1rem;
+        padding: 0.671rem;
+        text-decoration: none;
+    }
+    
+    &__username {
+        padding-left: 0.4rem;
+        font-size: 1.25rem;
+        color: colors.$text-primary;
+    }
+}
+
+.active-link {
+    border-bottom: 1px solid black;
+}

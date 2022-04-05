@@ -19,6 +19,7 @@ export class AuthService {
     const expiresAt = moment().add(res.expiresIn.substring(0, 2), 'm');
     localStorage.setItem('token', res.token);
     localStorage.setItem('expiresAt', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('userFullName', res.fullName);
   }
 
   public isLoggedIn(): boolean {

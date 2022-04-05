@@ -9,6 +9,7 @@ import { MainModule } from './main/main.module';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
@@ -17,6 +18,7 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
     SharedModule,
     AuthModule,
     MainModule,
+    LayoutModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,

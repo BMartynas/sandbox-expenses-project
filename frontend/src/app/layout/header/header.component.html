@@ -1,0 +1,15 @@
+<mat-toolbar *ngIf="isLoggedIn" class="header">
+    <a class="header__logo-link" [routerLink]="['']">Budgetify</a>
+      <div class="header__links-container">
+        <a [routerLink]="link" *ngFor="let link of links" (click)="activeLink = link" [ngClass]="activeLink === link ? 'active-link' : ''"  class="header__link">
+            {{ link }} 
+        </a>
+    </div>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+        <span class="header__username">{{userFullName}}</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="onLogout()" mat-menu-item>Logout</button>
+      </mat-menu>
+</mat-toolbar>
