@@ -14,8 +14,8 @@ export class HeaderComponent {
   ];
   public activeLink: string = '';
   public userFullName: string = localStorage.getItem('userFullName') || '';
-  @Input() isLoggedIn!: boolean;
-  @Output() logoutClicked: EventEmitter<void> = new EventEmitter<void>();
+  @Input() public isLoggedIn!: boolean;
+  @Output() public logoutClicked: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {}
 

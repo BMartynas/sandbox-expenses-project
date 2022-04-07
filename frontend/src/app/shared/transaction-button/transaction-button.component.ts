@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./transaction-button.component.scss'],
 })
 export class TransactionButtonComponent {
-  @Input() type!: string;
+  @Input() public type!: string;
 
   constructor() {}
 }

@@ -7,7 +7,7 @@ import { ITransaction } from 'src/app/shared/models/transaction.model';
   styleUrls: ['./transaction.component.scss'],
 })
 export class TransactionComponent {
-  @Input() transaction!: ITransaction;
+  @Input() public transaction!: ITransaction;
 
   constructor() {}
 }
