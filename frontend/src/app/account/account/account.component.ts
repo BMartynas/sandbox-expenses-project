@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TransactionService } from 'src/app/transaction/services/transaction.service';
-import { IAccount } from '../models/account.model';
+import { IAccount } from 'src/app/shared/models/account.model';
 import { AccountService } from '../services/account.service';
 
 @Component({
