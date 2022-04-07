@@ -1,10 +1,12 @@
 <main class="main">
     <div class="main__accounts">
-        <app-account *ngFor="let account of accounts" [account]="account"></app-account>
+        <app-account *ngFor="let account of (accounts$ | async); let i = index; trackBy:trackBy" [account]="account">
+        </app-account>
     </div>
 
     <div class="main__transactions">
-        <app-transaction *ngFor="let transaction of transactionsService.transactions" [transaction]="transaction"></app-transaction>
+        <app-transaction *ngFor="let transaction of (transactions$ | async); let i = index; trackBy:trackBy" [transaction]="transaction">
+        </app-transaction>
     </div>
 
     <div class="main__buttons">

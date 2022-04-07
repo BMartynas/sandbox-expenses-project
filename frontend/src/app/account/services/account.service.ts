@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Subject, Observable, tap } from 'rxjs';
 import { IAccount } from 'src/app/shared/models/account.model';
 
 @Injectable({
@@ -9,17 +9,26 @@ import { IAccount } from 'src/app/shared/models/account.model';
 export class AccountService {
   public accounts: IAccount[] = [];
   public selectedAccount!: IAccount;
+  private selectedAccountTransactions$: Subject<string> = new Subject<string>();
 
   constructor(private http: HttpClient) {}
 
-  public getAccounts(): Observable<any> {
-    return this.http
-      .get('http://localhost:3000/accounts')
-      .pipe(tap({ next: (res: any) => (this.accounts = res) }));
+  public getTransactionsObservable() {
+    return this.selectedAccountTransactions$.asObservable();
+  }
+
+  public getAccounts(): Observable<IAccount[]> {
+    return this.http.get<IAccount[]>('http://localhost:3000/accounts').pipe(
+      tap({
+        next: (res: any) => {
+          this.accounts = res;
+        },
+      })
+    );
   }
 
   public selectAccount(_id: string): void {
-    const account = this.accounts.find((acc) => acc._id === _id);
-    this.selectedAccount = account!;
+    this.selectedAccount = this.accounts.find((acc) => acc._id === _id)!;
+    this.selectedAccountTransactions$.next(_id);
   }
 }

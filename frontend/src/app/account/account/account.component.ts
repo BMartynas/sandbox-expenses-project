@@ -11,29 +11,14 @@ import { AccountService } from '../services/account.service';
 export class AccountComponent implements OnInit {
   @Input() public account!: IAccount;
 
-  constructor(
-    public accountsService: AccountService,
-    private transactionsService: TransactionService
-  ) {}
+  constructor(public accountsService: AccountService) {}
 
   public ngOnInit(): void {
-    const defaultSelectedAccount = this.accountsService.accounts[0];
-    this.accountsService.selectAccount(defaultSelectedAccount._id);
-    this.transactionsService
-      .getTransactions(defaultSelectedAccount._id)
-      .subscribe({
-        next: (data) => {
-          this.transactionsService.transactions = data;
-        },
-      });
+    const defaultSelectedAccountId = this.accountsService.accounts[0]._id;
+    this.accountsService.selectAccount(defaultSelectedAccountId);
   }
 
-  public onAccountClick(): void {
-    this.accountsService.selectAccount(this.account._id);
-    this.transactionsService.getTransactions(this.account._id).subscribe({
-      next: (data) => {
-        this.transactionsService.transactions = data;
-      },
-    });
+  public onAccountClick(_id: string): void {
+    this.accountsService.selectAccount(_id);
   }
 }
