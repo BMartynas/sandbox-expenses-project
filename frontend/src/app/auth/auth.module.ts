@@ -4,11 +4,13 @@ import { AuthFormComponent } from './auth-form/auth-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: 'login',
     component: AuthFormComponent,
+    canActivate: [LoginGuard],
   },
 ];
 

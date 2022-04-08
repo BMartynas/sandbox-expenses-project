@@ -1,0 +1,23 @@
+@use "src/colors" as colors;
+
+.add-button {
+    background-color: colors.$button-primary;
+    font-size: 1.25rem;
+    padding: 0.69rem;
+    border-radius: 0.625rem;
+    border: none;
+    display: flex;
+    align-items: center;
+    width: 14.7rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    
+    &__icon {
+        transform: scale(1.5);
+        color: colors.$white;
+    }
+    &__text {
+        color: colors.$text-primary;
+        margin-left: 0.47rem;
+    }
+}

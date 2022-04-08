@@ -1,16 +1,22 @@
 import { StatusCodes } from 'http-status-codes';
 import authService from '../services/auth.js';
+import UsersService from '../services/users.js';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const token = await authService.login(email, password);
+    const user = await UsersService.getUserByEmail(email);
 
     if (token) {
       res
         .status(StatusCodes.OK)
-        .json({ token, expiresIn: process.env.JWT_EXPIRES_IN });
+        .json({
+          token,
+          expiresIn: process.env.JWT_EXPIRES_IN,
+          fullName: `${user.firstName} ${user.lastName}`,
+        });
     } else {
       res
         .status(StatusCodes.UNAUTHORIZED)

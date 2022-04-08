@@ -2,12 +2,16 @@ import Transaction from '../models/transactions.js';
 
 export default class TransactionsService {
   static async getTransactions(accountId) {
-    const transactions = await Transaction.find({ accountId });
+    const transactions = await Transaction.find({ accountId }).populate(
+      'category'
+    );
     return transactions;
   }
 
   static async getTransaction(transactionId) {
-    const transaction = await Transaction.findOne({ _id: transactionId });
+    const transaction = await Transaction.findOne({
+      _id: transactionId,
+    }).populate('category');
     return transaction;
   }
 

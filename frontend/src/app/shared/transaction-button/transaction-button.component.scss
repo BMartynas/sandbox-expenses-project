@@ -1,0 +1,37 @@
+@use "src/colors" as colors;
+
+.transaction-button {
+    display: flex;
+    align-items: center;
+    width: 14.7rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.625rem;
+    border: none;
+    background: colors.$button-background-primary;
+    margin-bottom: 1rem;
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: colors.$white;
+        border-radius: 50%;
+        width: 1.875rem;
+        height: 1.875rem;
+    }
+
+    &__text {
+        font-size: 1.25rem;
+        color: colors.$text-primary;
+        margin-left: 0.47rem;
+    }
+}
+
+.income-icon {
+    background-color: colors.$income;
+}
+
+.expense-icon {
+    background-color: colors.$expense;
+}
