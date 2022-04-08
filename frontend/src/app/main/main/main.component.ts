@@ -4,7 +4,9 @@ import { AccountService } from 'src/app/account/services/account.service';
 import { TransactionService } from 'src/app/transaction/services/transaction.service';
 import { ITransaction } from 'src/app/shared/models/transaction.model';
 import { Observable } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -21,11 +23,14 @@ export class MainComponent implements OnInit {
 
   public ngOnInit(): void {
     this.accounts$ = this.accountsService.getAccounts();
-    this.accountsService.getTransactionsObservable().subscribe({
-      next: (selectedAccountId) => {
-        this.getTransactions(selectedAccountId);
-      },
-    });
+    this.accountsService
+      .getTransactionsObservable()
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (selectedAccountId) => {
+          this.getTransactions(selectedAccountId);
+        },
+      });
   }
 
   private getTransactions(_id: string) {

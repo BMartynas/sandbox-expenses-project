@@ -9,9 +9,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AddButtonComponent } from './add-button/add-button.component';
 import { MatCardModule } from '@angular/material/card';
 import { TransactionButtonComponent } from './transaction-button/transaction-button.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [AddButtonComponent, TransactionButtonComponent],
+  declarations: [
+    AddButtonComponent,
+    TransactionButtonComponent,
+    NotFoundComponent,
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
