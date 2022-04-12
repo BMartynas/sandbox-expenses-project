@@ -6,6 +6,11 @@ const accountSchema = new mongoose.Schema({
     ref: 'User',
     required: [true, 'User id is required!'],
   },
+  currency: {
+    type: mongoose.ObjectId,
+    ref: 'Currency',
+    required: [true, 'Currency id is required!'],
+  },
   name: {
     type: String,
     maxlength: 128,
@@ -15,10 +20,6 @@ const accountSchema = new mongoose.Schema({
     type: Number,
     min: 0,
     required: [true, 'Amount of account is required!'],
-  },
-  currency: {
-    type: String,
-    required: [true, 'Currency is required!'],
   },
   description: {
     type: String,

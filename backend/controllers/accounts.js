@@ -23,6 +23,18 @@ export const getOne = async (req, res) => {
   }
 };
 
+export const getCurrency = async (req, res) => {
+  try {
+    const currency = await accountsService.getAccountCurrency(
+      req.params.id,
+      req.user.id
+    );
+    res.status(StatusCodes.OK).json(currency);
+  } catch (error) {
+    handleError(res, error, StatusCodes.NOT_FOUND);
+  }
+};
+
 export const create = async (req, res) => {
   try {
     const account = await accountsService.createAccount(req.body, req.user.id);
