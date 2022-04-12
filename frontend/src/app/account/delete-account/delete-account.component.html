@@ -1,0 +1,13 @@
+<div>
+    <div class="header">
+        <h2 mat-dialog-title class="header__title">Delete Account</h2>
+        <button mat-dialog-close class="header__close-button">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <p>Are you sure you want to delete account?</p>
+    <mat-dialog-actions class="buttons">
+        <button mat-button (click)="onConfirmClick()">Yes</button>
+        <button mat-button mat-dialog-close class="buttons__no-button">No</button>
+    </mat-dialog-actions>
+</div>

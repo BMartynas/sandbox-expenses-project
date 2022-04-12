@@ -1,0 +1,43 @@
+<div class="account">
+    <div class="account__main-part">
+        <div class="account__header">
+            <h2 class="account__header-text">Account Information</h2>
+            <div class="account__buttons">
+                <button (click)="onEditClick()" class="account__button">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button  (click)="onDeleteClick()" class="account__button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button  mat-dialog-close>
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <h4 class="text bold-text">Title:</h4>
+            <p class="text">{{ data.name }}</p>
+        </div>
+        <div class="horizontal-line"></div>
+        <div class="row">
+            <h4 class="text bold-text">Balance:</h4>
+            <p class="text">{{ data.amount }}</p>
+        </div>
+        <div class="horizontal-line"></div>
+        <div class="row">
+            <h4 class="text bold-text">Currency:</h4>
+            <p class="text">{{ data.currency.code }}({{ data.currency.symbol }})</p>
+        </div>
+        <div class="horizontal-line"></div>
+        <div *ngIf="data.description" class="row">
+            <h4 class="text bold-text">Description:</h4>
+            <p class="text">{{ data.description }}</p>
+        </div>
+    </div>
+    
+    <div class="account__close-button-container">
+        <button mat-button class="text" mat-dialog-close>Close</button>
+    </div>
+    
+</div>
+

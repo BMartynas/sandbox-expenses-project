@@ -10,6 +10,7 @@ import { TransactionInfoComponent } from 'src/app/transaction/transaction-info/t
 import { PRIMARY_DIALOG_CONFIG } from 'src/app/shared/dialog/dialog.config';
 import { ICurrency } from 'src/app/shared/models/currency.model';
 import { CreateTransactionComponent } from 'src/app/transaction/create-transaction/create-transaction.component';
+import { CreateAccountComponent } from 'src/app/account/create-account/create-account.component';
 
 @UntilDestroy()
 @Component({
@@ -31,7 +32,15 @@ export class MainComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.accounts$ = this.accountsService.getAccounts();
+    this.getAccounts();
+    this.accountsService
+      .getAccountsChangeObservable()
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: () => {
+          this.getAccounts();
+        },
+      });
     this.accountsService
       .getTransactionsObservable()
       .pipe(untilDestroyed(this))
@@ -42,6 +51,10 @@ export class MainComponent implements OnInit {
           this.getCurrency(selectedAccountId);
         },
       });
+  }
+
+  private getAccounts(): void {
+    this.accounts$ = this.accountsService.getAccounts();
   }
 
   private getTransactions(_id: string): void {
@@ -101,6 +114,21 @@ export class MainComponent implements OnInit {
       .subscribe((data) => {
         if (data.created) {
           this.getTransactions(this.selectedAccountId);
+        }
+      });
+  }
+
+  public openCreateAccountDialog(): void {
+    let accountDialogRef = this.matDialog.open(CreateAccountComponent, {
+      data: this.selectedAccountId,
+      ...PRIMARY_DIALOG_CONFIG,
+    });
+    accountDialogRef
+      .afterClosed()
+      .pipe(untilDestroyed(this))
+      .subscribe((created) => {
+        if (created) {
+          this.getAccounts();
         }
       });
   }
