@@ -2,3 +2,20 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: colors.$background-primary; }
+
+.custom-primary-dialog-container .mat-dialog-container {
+    border-radius: 0;
+    background-color: colors.$dialog-background;
+    width: 37rem;
+    padding: 1.828rem 2.154rem 1.75rem 2.154rem;
+    color: colors.$text-primary;
+}
+
+.custom-confirmation-dialog-container .mat-dialog-container {
+    border-radius: 0.625rem;
+    background-color: colors.$dialog-background;
+    width: 39rem;
+    padding: 1.438rem 1.563rem 0 1.563rem;
+    color: colors.$text-primary;
+    box-shadow: none;
+}

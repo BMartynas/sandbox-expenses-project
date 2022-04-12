@@ -5,8 +5,9 @@ export interface ITransaction {
   accountId: string;
   title: string;
   type: string;
-  category: ICategory;
+  categories: ICategory[];
   description: string;
   dateOfTransaction: Date;
+  payee?: string;
   amount: number;
 }

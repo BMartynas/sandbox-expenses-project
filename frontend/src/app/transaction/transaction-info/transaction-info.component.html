@@ -1,0 +1,59 @@
+<div class="transaction">
+    <div class="transaction__main-part">
+        <div class="transaction__header">
+            <h2 class="transaction__header-text">Transaction Information</h2>
+            <div class="transaction__buttons">
+                <button (click)="onEditClick()" class="transaction__button">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button  (click)="onDeleteClick()" class="transaction__button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button  mat-dialog-close>
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="transaction__main-info">
+            <div class="transaction__icon-type">
+                <mat-icon [ngClass]="data.type === 'income' ? 'transaction__income-icon' : 'transaction__expense-icon'" 
+                class="transaction__icon">
+                {{ data.type === "income" ? "arrow_downward" : "arrow_upward"}}
+                </mat-icon>
+                <p class="transaction__type-text">
+                    {{ data.type === "income" ? "Income" : "Expenses"}}
+                </p>
+            </div>
+            <p [ngClass]="data.type === 'income' ? 'transaction__income-text' : 'transaction__expense-text'"
+                class="transaction__info-text">{{data.type === 'expenses' ? '-' : ''}}{{data.amount}}{{data.symbol}}</p>
+        </div>
+        <p class="transaction__title">{{data.title}}</p>
+        <div class="transaction__categories"> 
+            <div *ngFor="let category of data.categories; let i = index; trackBy:trackBy" class="transaction__category">
+                <span class="transaction__category-title">{{category.title}}</span>
+            </div>
+        </div>
+        <div class="transaction__payment">
+            <h4 class="text bold-text">Payment date:</h4>
+            <p class="text">{{ data.dateOfTransaction | date:'d.MM.yyyy'}}</p>
+        </div>
+        <div class="horizontal-line"></div>
+        <div *ngIf="data.payee">
+            <div class="row">
+                <h4 class="text bold-text">Payee:</h4>
+                <p class="text">{{ data.payee }}</p>
+            </div>
+            <div class="horizontal-line"></div>
+        </div>
+        <div *ngIf="data.description" class="row">
+            <h4 class="text bold-text">Description:</h4>
+            <p class="text">{{ data.description }}</p>
+        </div>        
+    </div>
+    
+    <div class="transaction__close-button-container">
+        <button mat-button class="text" (click)="onCloseClick()">Close</button>
+    </div>
+    
+</div>
+

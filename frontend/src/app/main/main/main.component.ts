@@ -5,6 +5,11 @@ import { TransactionService } from 'src/app/transaction/services/transaction.ser
 import { ITransaction } from 'src/app/shared/models/transaction.model';
 import { Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { MatDialog } from '@angular/material/dialog';
+import { TransactionInfoComponent } from 'src/app/transaction/transaction-info/transaction-info.component';
+import { PRIMARY_DIALOG_CONFIG } from 'src/app/shared/dialog/dialog.config';
+import { ICurrency } from 'src/app/shared/models/currency.model';
+import { CreateTransactionComponent } from 'src/app/transaction/create-transaction/create-transaction.component';
 
 @UntilDestroy()
 @Component({
@@ -14,11 +19,15 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class MainComponent implements OnInit {
   public accounts$!: Observable<IAccount[]>;
-  public transactions$!: Observable<ITransaction[]>;
+  public transactions!: ITransaction[];
+  public showDeletedTransactionNotification: boolean = false;
+  private selectedAccountId!: string;
+  private selectedAccountCurrency!: ICurrency;
 
   constructor(
     private accountsService: AccountService,
-    public transactionsService: TransactionService
+    public transactionsService: TransactionService,
+    private matDialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
@@ -28,16 +37,81 @@ export class MainComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (selectedAccountId) => {
+          this.selectedAccountId = selectedAccountId;
           this.getTransactions(selectedAccountId);
+          this.getCurrency(selectedAccountId);
         },
       });
   }
 
-  private getTransactions(_id: string) {
-    this.transactions$ = this.transactionsService.getTransactions(_id);
+  private getTransactions(_id: string): void {
+    this.transactionsService
+      .getTransactions(_id)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (transactions) => {
+          this.transactions = transactions;
+        },
+      });
+  }
+
+  private getCurrency(id: string): void {
+    this.accountsService
+      .getAccountCurrency(id)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (currency) => {
+          this.selectedAccountCurrency = currency;
+        },
+      });
   }
 
   public trackBy(index: number, item: IAccount | ITransaction): string {
     return item._id;
+  }
+
+  public openTransactionDialog(transaction: ITransaction): void {
+    let { _id, ...currencyPayload } = this.selectedAccountCurrency;
+    let transactionDialogRef = this.matDialog.open(TransactionInfoComponent, {
+      data: { ...transaction, ...currencyPayload },
+      ...PRIMARY_DIALOG_CONFIG,
+    });
+    transactionDialogRef
+      .afterClosed()
+      .pipe(untilDestroyed(this))
+      .subscribe((data) => {
+        if (data.deletedTransaction) {
+          this.showDeletedTransactionNotification = true;
+          this.removeDeletedAccount(data.transactionId);
+          this.hideNotification();
+        } else if (data.editedTransaction) {
+          this.getTransactions(this.selectedAccountId);
+        }
+      });
+  }
+
+  public openCreateTransactionDialog(): void {
+    let transactionDialogRef = this.matDialog.open(CreateTransactionComponent, {
+      data: this.selectedAccountId,
+      ...PRIMARY_DIALOG_CONFIG,
+    });
+    transactionDialogRef
+      .afterClosed()
+      .pipe(untilDestroyed(this))
+      .subscribe((data) => {
+        if (data.created) {
+          this.getTransactions(this.selectedAccountId);
+        }
+      });
+  }
+
+  private hideNotification(): void {
+    setTimeout(() => {
+      this.showDeletedTransactionNotification = false;
+    }, 5000);
+  }
+
+  private removeDeletedAccount(id: string): void {
+    this.transactions = this.transactions.filter((trans) => trans._id !== id)!;
   }
 }

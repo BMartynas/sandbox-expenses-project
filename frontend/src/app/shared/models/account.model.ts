@@ -1,8 +1,10 @@
+import { ICurrency } from './currency.model';
+
 export interface IAccount {
   _id: string;
   userId: string;
   name: string;
   amount: number;
-  currency: string;
+  currency: ICurrency;
   description: string;
 }

@@ -10,6 +10,9 @@ import { AddButtonComponent } from './add-button/add-button.component';
 import { MatCardModule } from '@angular/material/card';
 import { TransactionButtonComponent } from './transaction-button/transaction-button.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatToolbarModule,
     MatMenuModule,
     MatCardModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
   exports: [
     MatButtonModule,
@@ -37,6 +43,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AddButtonComponent,
     TransactionButtonComponent,
     MatCardModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
 })
 export class SharedModule {}

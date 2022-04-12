@@ -1,0 +1,126 @@
+@use "src/colors" as colors;
+
+.edit-transaction {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__header-text {
+        margin-bottom: 0;
+        font-size: 2rem;
+        line-height: 2.563rem;
+    }
+
+    &__close-button {
+        border: none;
+        background-color: colors.$button-background-primary;
+        cursor: pointer;
+
+        mat-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 2.298rem;
+            height: 2.298rem;
+        }
+    }
+
+    &__close-button:hover {
+        background-color: colors.$button-hover;
+    }
+
+    &__radio-buttons {
+        display: flex;
+        margin-top: 2rem;
+        margin-bottom: 2.5rem;
+
+        button {
+            width: 10rem;
+            height: 3.063rem;
+            display: flex;
+            align-items: center;
+            border-radius: 0.625rem;
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: colors.$white;
+        border-radius: 50%;
+        width: 2.188rem;
+        height: 2.188rem;
+        margin-right: 0.375rem;
+    }
+
+    &__income-icon {
+        background-color: colors.$income;
+    }
+
+    &__expense-icon {
+        background-color: colors.$expense;
+    }
+
+    &__type-text {
+        font-size: 1.25rem;
+    }
+
+    &__income-button {
+        margin-left: -1rem;
+        justify-content: flex-end;
+    }
+
+    &__input {
+        width: 32.5rem;
+        border-radius: 1px solid red;
+        background: transparent;
+
+    }
+
+    &__action-buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            width: 6.25rem;
+            height: 3.125rem;
+            border: none;
+            border-radius: 0.625rem;
+        }
+    }
+
+    &__save-button {
+        background-color: colors.$button-primary;
+    }
+}
+
+.selected {
+    background-color: colors.$button-background-selected;
+    border: 2px solid colors.$button-border-selected;
+    color: colors.$text-primary;
+    z-index: 11;
+}
+
+.not-selected {
+    background: colors.$button-background-not-selected;
+    border: 1px solid colors.$button-border-not-selected;
+    color: colors.$text-secondary;
+    z-index: 10;
+}
+
+.text {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+}

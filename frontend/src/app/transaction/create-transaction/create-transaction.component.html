@@ -1,0 +1,62 @@
+<form [formGroup]="createTransactionForm" (ngSubmit)="onSave()" class="create-transaction" >
+    <div class="create-transaction__main-content">
+        <div class="create-transaction__header">
+            <h2 class="create-transaction__header-text">Transaction Information</h2>
+            <button  mat-dialog-close class="create-transaction__close-button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <div class="create-transaction__radio-buttons">
+            <button (click)="selectTransactionType('expenses')" type="button" [ngClass]="selectedCategory === 'expenses' ? 'selected' : 'not-selected'">
+                <mat-icon class="create-transaction__expense-icon create-transaction__icon">
+                    arrow_upward
+                </mat-icon>
+                <p class="create-transaction__type-text">
+                    Expenses
+                </p>
+            </button>
+            <button (click)="selectTransactionType('income')" type="button" [ngClass]="selectedCategory === 'income' ? 'selected' : 'not-selected'"
+            class="create-transaction__income-button">
+                <mat-icon class="create-transaction__income-icon create-transaction__icon">
+                    arrow_downward
+                </mat-icon>
+                <p class="create-transaction__type-text">
+                    Income
+                </p>
+            </button>
+        </div>
+        <mat-form-field class="create-transaction__input" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput  formControlName="title">
+        </mat-form-field>
+        <mat-form-field class="create-transaction__input" appearance="outline">
+            <mat-label>Categories</mat-label>
+            <mat-select formControlName="categories" multiple>
+                <mat-option *ngFor="let category of categoriesByType" [value]="category._id">
+                    {{category.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="create-transaction__input" appearance="outline">
+            <mat-label>Amount</mat-label>
+            <input matInput  formControlName="amount">
+        </mat-form-field>
+        <mat-form-field class="create-transaction__input" appearance="outline">
+            <mat-label>Payment Date</mat-label>
+            <input type="date" 
+            matInput  formControlName="dateOfTransaction">
+        </mat-form-field>
+        <mat-form-field class="create-transaction__input" appearance="outline">
+            <mat-label>Payee</mat-label>
+            <input matInput  formControlName="payee">
+        </mat-form-field>
+        <mat-form-field class="create-transaction__input" appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput  formControlName="description">
+        </mat-form-field>
+    </div>
+    <div class="create-transaction__action-buttons">
+        <button mat-button mat-dialog-close class="text">Cancel</button>
+        <button type="submit" class="create-transaction__save-button text">Create</button>
+    </div>
+</form>

@@ -1,0 +1,62 @@
+<form [formGroup]="editTransactionForm" (ngSubmit)="onSave()" class="edit-transaction" >
+    <div class="edit-transaction__main-content">
+        <div class="edit-transaction__header">
+            <h2 class="edit-transaction__header-text">Transaction Information</h2>
+            <button  mat-dialog-close class="edit-transaction__close-button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <div class="edit-transaction__radio-buttons">
+            <button (click)="selectTransactionType('expenses')" type="button" [ngClass]="selectedCategory === 'expenses' ? 'selected' : 'not-selected'">
+                <mat-icon class="edit-transaction__expense-icon edit-transaction__icon">
+                    arrow_upward
+                </mat-icon>
+                <p class="edit-transaction__type-text">
+                    Expenses
+                </p>
+            </button>
+            <button (click)="selectTransactionType('income')" type="button" [ngClass]="selectedCategory === 'income' ? 'selected' : 'not-selected'"
+            class="edit-transaction__income-button">
+                <mat-icon class="edit-transaction__income-icon edit-transaction__icon">
+                    arrow_downward
+                </mat-icon>
+                <p class="edit-transaction__type-text">
+                    Income
+                </p>
+            </button>
+        </div>
+        <mat-form-field class="edit-transaction__input" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput  formControlName="title">
+        </mat-form-field>
+        <mat-form-field class="edit-transaction__input" appearance="outline">
+            <mat-label>Categories</mat-label>
+            <mat-select formControlName="categories" multiple>
+                <mat-option *ngFor="let category of categoriesByType" [value]="category._id">
+                    {{category.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="edit-transaction__input" appearance="outline">
+            <mat-label>Amount</mat-label>
+            <input matInput  formControlName="amount">
+        </mat-form-field>
+        <mat-form-field class="edit-transaction__input" appearance="outline">
+            <mat-label>Payment Date</mat-label>
+            <input type="date" 
+            matInput  formControlName="dateOfTransaction">
+        </mat-form-field>
+        <mat-form-field class="edit-transaction__input" appearance="outline">
+            <mat-label>Payee</mat-label>
+            <input matInput  formControlName="payee">
+        </mat-form-field>
+        <mat-form-field class="edit-transaction__input" appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput  formControlName="description">
+        </mat-form-field>
+    </div>
+    <div class="edit-transaction__action-buttons">
+        <button mat-button mat-dialog-close class="text">Cancel</button>
+        <button type="submit" class="edit-transaction__save-button text">Save</button>
+    </div>
+</form>

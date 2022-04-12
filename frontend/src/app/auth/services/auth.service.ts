@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import * as moment from 'moment';
+import { APP_CONFIG } from 'src/app/app.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private url: string = APP_CONFIG.api.url;
+
   constructor(private http: HttpClient) {}
 
   public login(email: string, password: string): Observable<any> {
     return this.http
-      .post('http://localhost:3000/auth/login', { email, password })
+      .post(`${this.url}/auth/login`, { email, password })
       .pipe(tap((res) => this.setSession(res)));
   }
 
