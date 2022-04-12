@@ -4,6 +4,7 @@ import 'dotenv/config';
 import categoriesRoutes from './routes/categories.js';
 import accountsRoutes from './routes/accounts.js';
 import transactionsRoutes from './routes/transactions.js';
+import currenciesRoutes from './routes/currencies.js';
 import authRoutes from './routes/auth.js';
 import usersRoutes from './routes/users.js';
 import { jwtAuth } from './auth/jwtStrategy.js';
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/categories', jwtAuth, categoriesRoutes);
 app.use('/accounts', jwtAuth, accountsRoutes);
+app.use('/currencies', jwtAuth, currenciesRoutes);
 app.use('/transactions', jwtAuth, transactionsRoutes);
 app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);

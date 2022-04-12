@@ -27,8 +27,8 @@ export default class AccountsService {
   }
 
   static async updateAccount(accountId, newAccountData, userId) {
-    const updatedAccount = await Account.findOneAndUpdate(
-      { id: accountId, userId },
+    const updatedAccount = await Account.findByIdAndUpdate(
+      accountId,
       newAccountData,
       { new: true }
     );

@@ -19,7 +19,7 @@ const accountSchema = new mongoose.Schema({
   amount: {
     type: Number,
     min: 0,
-    required: [true, 'Amount of account is required!'],
+    default: 0,
   },
   description: {
     type: String,
