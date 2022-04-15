@@ -6,7 +6,8 @@ import { CONFIRMATION_DIALOG_CONFIG } from 'src/app/shared/dialog/dialog.config'
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PRIMARY_DIALOG_CONFIG } from 'src/app/shared/dialog/dialog.config';
 import { EditAccountComponent } from '../edit-account/edit-account.component';
-import { DeleteAccountComponent } from '../delete-account/delete-account.component';
+import { DeleteNotificationComponent } from 'src/app/shared/delete-notification/delete-notification.component';
+import { ItemToDelete } from 'src/app/shared/enums/item-to-delete.enum';
 
 @UntilDestroy()
 @Component({
@@ -48,8 +49,8 @@ export class AccountInfoComponent implements OnDestroy {
   }
 
   public onDeleteClick(): void {
-    let deleteDialogRef = this.matDialog.open(DeleteAccountComponent, {
-      data: this.data._id,
+    let deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
+      data: { id: this.data._id, item: ItemToDelete.Accout },
       ...CONFIRMATION_DIALOG_CONFIG,
     });
     deleteDialogRef

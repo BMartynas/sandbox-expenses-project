@@ -2,13 +2,14 @@ import { Component, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ITransaction } from 'src/app/shared/models/transaction.model';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteTransactionComponent } from '../delete-transaction/delete-transaction.component';
 import { CONFIRMATION_DIALOG_CONFIG } from 'src/app/shared/dialog/dialog.config';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ICategory } from 'src/app/shared/models/category.model';
 import { PRIMARY_DIALOG_CONFIG } from 'src/app/shared/dialog/dialog.config';
 import { EditTransactionComponent } from '../edit-transaction/edit-transaction.component';
 import { ICurrency } from 'src/app/shared/models/currency.model';
+import { ItemToDelete } from 'src/app/shared/enums/item-to-delete.enum';
+import { DeleteNotificationComponent } from 'src/app/shared/delete-notification/delete-notification.component';
 
 @UntilDestroy()
 @Component({
@@ -55,8 +56,8 @@ export class TransactionInfoComponent implements OnDestroy {
   }
 
   public onDeleteClick(): void {
-    let deleteDialogRef = this.matDialog.open(DeleteTransactionComponent, {
-      data: this.data._id,
+    let deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
+      data: { id: this.data._id, item: ItemToDelete.Transaction },
       ...CONFIRMATION_DIALOG_CONFIG,
     });
     deleteDialogRef

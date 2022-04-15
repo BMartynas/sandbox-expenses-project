@@ -13,12 +13,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { DeleteNotificationComponent } from './delete-notification/delete-notification.component';
 
 @NgModule({
   declarations: [
     AddButtonComponent,
     TransactionButtonComponent,
     NotFoundComponent,
+    DeleteNotificationComponent,
   ],
   imports: [
     CommonModule,
@@ -46,6 +48,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     ReactiveFormsModule,
     MatSelectModule,
+    DeleteNotificationComponent,
   ],
 })
 export class SharedModule {}
