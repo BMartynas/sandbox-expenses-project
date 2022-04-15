@@ -39,7 +39,7 @@ export class EditAccountComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.matDialogRef.close({
       edited: this.edited,
     });
