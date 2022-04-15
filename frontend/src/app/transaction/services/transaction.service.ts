@@ -22,7 +22,6 @@ export class TransactionService {
     accountId: string,
     properties: ITransaction
   ): Observable<ITransaction> {
-    console.log(properties);
     return this.http.post<ITransaction>(
       `${this.url}/transactions/${accountId}`,
       {
