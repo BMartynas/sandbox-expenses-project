@@ -10,6 +10,7 @@ import { EditTransactionComponent } from '../edit-transaction/edit-transaction.c
 import { ICurrency } from 'src/app/shared/models/currency.model';
 import { ItemToDelete } from 'src/app/shared/enums/item-to-delete.enum';
 import { DeleteNotificationComponent } from 'src/app/shared/delete-notification/delete-notification.component';
+import { TransactionService } from '../services/transaction.service';
 
 @UntilDestroy()
 @Component({
@@ -24,7 +25,8 @@ export class TransactionInfoComponent implements OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ITransaction & ICurrency,
     private matDialog: MatDialog,
-    private matDialogRef: MatDialogRef<TransactionInfoComponent>
+    private matDialogRef: MatDialogRef<TransactionInfoComponent>,
+    private transactionsService: TransactionService
   ) {}
 
   public ngOnDestroy(): void {
@@ -57,16 +59,23 @@ export class TransactionInfoComponent implements OnDestroy {
 
   public onDeleteClick(): void {
     let deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
-      data: { id: this.data._id, item: ItemToDelete.Transaction },
+      data: ItemToDelete.Transaction,
       ...CONFIRMATION_DIALOG_CONFIG,
     });
     deleteDialogRef
       .afterClosed()
       .pipe(untilDestroyed(this))
-      .subscribe((data) => {
-        if (data) {
-          this.deletedTransaction = true;
-          this.matDialogRef.close();
+      .subscribe((deleted) => {
+        if (deleted) {
+          this.transactionsService
+            .deleteTransaction(this.data._id)
+            .pipe(untilDestroyed(this))
+            .subscribe({
+              next: () => {
+                this.deletedTransaction = true;
+                this.matDialogRef.close();
+              },
+            });
         }
       });
   }

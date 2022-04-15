@@ -1,5 +1,5 @@
 import { IAccount } from 'src/app/shared/models/account.model';
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { CONFIRMATION_DIALOG_CONFIG } from 'src/app/shared/dialog/dialog.config';
@@ -8,6 +8,7 @@ import { PRIMARY_DIALOG_CONFIG } from 'src/app/shared/dialog/dialog.config';
 import { EditAccountComponent } from '../edit-account/edit-account.component';
 import { DeleteNotificationComponent } from 'src/app/shared/delete-notification/delete-notification.component';
 import { ItemToDelete } from 'src/app/shared/enums/item-to-delete.enum';
+import { AccountService } from '../services/account.service';
 
 @UntilDestroy()
 @Component({
@@ -15,22 +16,13 @@ import { ItemToDelete } from 'src/app/shared/enums/item-to-delete.enum';
   templateUrl: './account-info.component.html',
   styleUrls: ['./account-info.component.scss'],
 })
-export class AccountInfoComponent implements OnDestroy {
-  private edited: boolean = false;
-  private deleted: boolean = false;
-
+export class AccountInfoComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IAccount,
     private matDialog: MatDialog,
-    private matDialogRef: MatDialogRef<AccountInfoComponent>
+    private matDialogRef: MatDialogRef<AccountInfoComponent>,
+    private accountsService: AccountService
   ) {}
-
-  ngOnDestroy(): void {
-    this.matDialogRef.close({
-      edited: this.edited,
-      deleted: this.deleted,
-    });
-  }
 
   public onEditClick(): void {
     let editDialogRef = this.matDialog.open(EditAccountComponent, {
@@ -42,7 +34,6 @@ export class AccountInfoComponent implements OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((data) => {
         if (data.edited) {
-          this.edited = true;
           this.matDialogRef.close();
         }
       });
@@ -50,7 +41,7 @@ export class AccountInfoComponent implements OnDestroy {
 
   public onDeleteClick(): void {
     let deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
-      data: { id: this.data._id, item: ItemToDelete.Accout },
+      data: ItemToDelete.Accout,
       ...CONFIRMATION_DIALOG_CONFIG,
     });
     deleteDialogRef
@@ -58,8 +49,14 @@ export class AccountInfoComponent implements OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe((deleted) => {
         if (deleted) {
-          this.deleted = true;
-          this.matDialogRef.close();
+          this.accountsService
+            .deleteAccount(this.data._id)
+            .pipe(untilDestroyed(this))
+            .subscribe({
+              next: () => {
+                this.matDialogRef.close();
+              },
+            });
         }
       });
   }
