@@ -69,9 +69,12 @@ export class EditTransactionComponent implements OnInit, OnDestroy {
         ...this.editTransactionForm.value,
       })
       .pipe(untilDestroyed(this))
-      .subscribe();
-    this.edited = true;
-    this.matDialogRef.close();
+      .subscribe({
+        next: () => {
+          this.edited = true;
+          this.matDialogRef.close();
+        },
+      });
   }
 
   public selectTransactionType(type: string): void {

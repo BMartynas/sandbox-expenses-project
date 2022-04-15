@@ -65,9 +65,12 @@ export class CreateTransactionComponent implements OnInit, OnDestroy {
         ...this.createTransactionForm.value,
       })
       .pipe(untilDestroyed(this))
-      .subscribe();
-    this.created = true;
-    this.matDialogRef.close();
+      .subscribe({
+        next: () => {
+          this.created = true;
+          this.matDialogRef.close();
+        },
+      });
   }
 
   public selectTransactionType(type: string): void {

@@ -49,8 +49,11 @@ export class EditAccountComponent implements OnInit, OnDestroy {
     this.accountsService
       .updateAccount(this.data._id, this.editAccountForm.value)
       .pipe(untilDestroyed(this))
-      .subscribe();
-    this.edited = true;
-    this.matDialogRef.close();
+      .subscribe({
+        next: () => {
+          this.edited = true;
+          this.matDialogRef.close();
+        },
+      });
   }
 }

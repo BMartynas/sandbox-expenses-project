@@ -19,12 +19,15 @@ export class DeleteTransactionComponent implements OnDestroy {
   ) {}
 
   public onConfirmClick(): void {
-    this.deletedTransaction = true;
     this.transactionsService
       .deleteTransaction(this.data)
       .pipe(untilDestroyed(this))
-      .subscribe();
-    this.matDialogRef.close();
+      .subscribe({
+        next: () => {
+          this.deletedTransaction = true;
+          this.matDialogRef.close();
+        },
+      });
   }
 
   public ngOnDestroy(): void {

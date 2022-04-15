@@ -48,8 +48,11 @@ export class CreateAccountComponent implements OnInit, OnDestroy {
     this.accountsService
       .createAccount(this.createAccountForm.value)
       .pipe(untilDestroyed(this))
-      .subscribe();
-    this.created = true;
-    this.matDialogRef.close();
+      .subscribe({
+        next: () => {
+          this.created = true;
+          this.matDialogRef.close();
+        },
+      });
   }
 }

@@ -19,12 +19,15 @@ export class DeleteAccountComponent implements OnDestroy {
   ) {}
 
   public onConfirmClick(): void {
-    this.deleted = true;
     this.accountsService
       .deleteAccount(this.data)
       .pipe(untilDestroyed(this))
-      .subscribe();
-    this.matDialogRef.close();
+      .subscribe({
+        next: () => {
+          this.deleted = true;
+          this.matDialogRef.close();
+        },
+      });
   }
 
   public ngOnDestroy(): void {
