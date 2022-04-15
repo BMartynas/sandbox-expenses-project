@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { LayoutModule } from './layout/layout.module';
+import { ErrorInterceptor } from './error/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,11 @@ import { LayoutModule } from './layout/layout.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],
