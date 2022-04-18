@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { LayoutModule } from './layout/layout.module';
 import { ErrorInterceptor } from './error/error.interceptor';
+import { CategoriesModule } from './categories/categories.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { ErrorInterceptor } from './error/error.interceptor';
     SharedModule,
     AuthModule,
     MainModule,
+    CategoriesModule,
     LayoutModule,
     HttpClientModule,
     AppRoutingModule,

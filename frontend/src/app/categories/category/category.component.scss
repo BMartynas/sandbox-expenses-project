@@ -1,0 +1,48 @@
+@use "src/colors" as colors;
+
+.category {
+    display: flex;
+    padding: 0.2rem 1.151rem 0  0.892rem;
+    border: 0.125rem solid;
+    border-radius: 0.625rem;
+    margin-right: 1.669rem;
+    margin-bottom: 1.524rem;
+
+    &__form {
+        margin: 0;
+        padding: 0;
+
+        button {
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    &__input {
+        font-size: 20px;
+        font-weight: 700;
+        color: colors.$text-primary;
+        border: none;
+    }
+}
+
+.income {
+    border-color: colors.$income;
+}
+
+.expense {
+    border-color: colors.$expense;
+}
+
+:host ::ng-deep .mat-form-field-disabled {
+    .mat-input-element {
+        color: colors.$text-primary;
+    } 
+    .mat-form-field-underline {
+        display: none;
+    }
+}
+
+:host ::ng-deep .mat-form-field-infix {
+    height: 0.1rem;
+}

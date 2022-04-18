@@ -1,0 +1,37 @@
+<form [formGroup]="createCategoryForm" (ngSubmit)="onCreate()" class="create-category">
+    <div class="create-category__main-content">
+        <div class="create-category__header">
+            <h2 class="create-category__header-text">Create Category</h2>
+            <button  mat-dialog-close class="create-category__close-button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <div class="create-category__radio-buttons">
+            <button (click)="selectType('expenses')" type="button" [ngClass]="selectedType === 'expenses' ? 'selected' : 'not-selected'">
+                <mat-icon class="create-category__expense-icon create-category__icon">
+                    arrow_upward
+                </mat-icon>
+                <p class="create-category__type-text">
+                    Expenses
+                </p>
+            </button>
+            <button (click)="selectType('income')" type="button" [ngClass]="selectedType === 'income' ? 'selected' : 'not-selected'"
+            class="create-category__income-button">
+                <mat-icon class="create-category__income-icon create-category__icon">
+                    arrow_downward
+                </mat-icon>
+                <p class="create-category__type-text">
+                    Income
+                </p>
+            </button>
+        </div>
+        <mat-form-field class="create-category__input" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput  formControlName="title">
+        </mat-form-field>
+    </div>
+    <div class="create-category__action-buttons">
+        <button mat-button mat-dialog-close class="text">Cancel</button>
+        <button type="submit" class="create-category__save-button text">Create</button>
+    </div>
+</form> 

@@ -1,0 +1,24 @@
+<div class="categories">
+    <div class="categories__main-part">
+        <div class="categories__items">
+            <app-category 
+                *ngFor="let category of filteredCategories; let i = index; trackBy: trackBy" [category]="category">
+            </app-category>
+        </div>
+    </div>
+
+    <div class="categories__buttons">
+        <app-transaction-button
+            (click)="onFilterIncome()" 
+            type="Income">
+        </app-transaction-button>
+        <app-transaction-button 
+            (click)="onFilterExpenses()" 
+            type="Expenses">
+        </app-transaction-button>
+        <app-add-button
+            text="Add Category"
+            (click)="openCreateCategoryDialog()"
+        ></app-add-button>
+    </div>
+</div>
