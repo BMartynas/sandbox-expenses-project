@@ -40,7 +40,7 @@
                     <th>Amount</th>
                     <th>% in total</th>
                 </tr>
-                <tr *ngFor="let stat of CategoriesStatistics">
+                <tr *ngFor="let stat of categoriesStatistics">
                     <td>{{stat.category}}</td>
                     <td>{{stat.amount}} {{selectedAccountCurrency.symbol}}</td>
                     <td>{{stat.totalShare}}%</td>

@@ -19,7 +19,7 @@ export class StatisticsComponent implements OnInit {
   public accounts!: IAccount[];
   public selectedStatistics: string = 'categories';
   public totalExpenses: string = '';
-  public CategoriesStatistics!: ICategoriesStatistics[];
+  public categoriesStatistics!: ICategoriesStatistics[];
   public selectedAccountCurrency!: ICurrency;
   private transactions!: ITransaction[];
   public dateRange = new FormGroup({
@@ -82,7 +82,7 @@ export class StatisticsComponent implements OnInit {
       this.statisticsService.getTotalExpenses(this.transactions, start, end) +
       this.selectedAccountCurrency.symbol;
 
-    this.CategoriesStatistics = this.statisticsService.getCategoriesStatistics(
+    this.categoriesStatistics = this.statisticsService.getCategoriesStatistics(
       this.transactions,
       start,
       end
