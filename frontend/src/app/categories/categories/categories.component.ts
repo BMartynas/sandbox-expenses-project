@@ -61,13 +61,9 @@ export class CategoriesComponent implements OnInit {
       });
   }
 
-  public onFilterExpenses(): void {
-    this.filterType = this.filterType === 'income' ? '' : 'income';
-    this.filterCategories();
-  }
-
-  public onFilterIncome(): void {
-    this.filterType = this.filterType === 'expenses' ? '' : 'expenses';
+  public onFilter(type: string): void {
+    if (this.filterType === type) this.filterType = '';
+    else this.filterType = type;
     this.filterCategories();
   }
 

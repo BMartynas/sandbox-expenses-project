@@ -9,11 +9,11 @@
 
     <div class="categories__buttons">
         <app-transaction-button
-            (click)="onFilterIncome()" 
+            (click)="onFilter('expenses')" 
             type="Income">
         </app-transaction-button>
         <app-transaction-button 
-            (click)="onFilterExpenses()" 
+            (click)="onFilter('income')" 
             type="Expenses">
         </app-transaction-button>
         <app-add-button
