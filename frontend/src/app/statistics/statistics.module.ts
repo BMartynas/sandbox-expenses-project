@@ -8,7 +8,7 @@ import { AccountModule } from '../account/account.module';
 
 const routes: Routes = [
   {
-    path: 'Statistics',
+    path: 'statistics',
     component: StatisticsComponent,
     canActivate: [AuthGuard],
   },

@@ -9,7 +9,7 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
 
 const routes: Routes = [
   {
-    path: 'Categories',
+    path: 'categories',
     component: CategoriesComponent,
     canActivate: [AuthGuard],
   },

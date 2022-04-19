@@ -7,10 +7,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class HeaderComponent {
   public links: string[] = [
-    'Categories',
-    'Subscriptions',
-    'Obligatory',
-    'Statistics',
+    'categories',
+    'subscriptions',
+    'obligatory',
+    'statistics',
   ];
   public activeLink: string = '';
   public userFullName: string = localStorage.getItem('userFullName') || '';
