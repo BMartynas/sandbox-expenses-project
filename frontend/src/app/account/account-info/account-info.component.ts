@@ -25,7 +25,7 @@ export class AccountInfoComponent {
   ) {}
 
   public onEditClick(): void {
-    let editDialogRef = this.matDialog.open(EditAccountComponent, {
+    const editDialogRef = this.matDialog.open(EditAccountComponent, {
       data: this.data,
       ...PRIMARY_DIALOG_CONFIG,
     });
@@ -40,7 +40,7 @@ export class AccountInfoComponent {
   }
 
   public onDeleteClick(): void {
-    let deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
+    const deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
       data: ItemToDelete.Accout,
       ...CONFIRMATION_DIALOG_CONFIG,
     });

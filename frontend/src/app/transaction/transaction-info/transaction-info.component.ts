@@ -38,7 +38,7 @@ export class TransactionInfoComponent implements OnDestroy {
   }
 
   public onEditClick(): void {
-    let editDialogRef = this.matDialog.open(EditTransactionComponent, {
+    const editDialogRef = this.matDialog.open(EditTransactionComponent, {
       data: this.data,
       ...PRIMARY_DIALOG_CONFIG,
     });
@@ -58,7 +58,7 @@ export class TransactionInfoComponent implements OnDestroy {
   }
 
   public onDeleteClick(): void {
-    let deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
+    const deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
       data: ItemToDelete.Transaction,
       ...CONFIRMATION_DIALOG_CONFIG,
     });

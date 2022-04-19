@@ -39,7 +39,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   public openCreateCategoryDialog(): void {
-    let createDialogRef = this.matDialog.open(CreateCategoryComponent, {
+    const createDialogRef = this.matDialog.open(CreateCategoryComponent, {
       ...PRIMARY_DIALOG_CONFIG,
     });
 

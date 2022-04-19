@@ -84,8 +84,8 @@ export class MainComponent implements OnInit {
   }
 
   public openTransactionDialog(transaction: ITransaction): void {
-    let { _id, ...currencyPayload } = this.selectedAccountCurrency;
-    let transactionDialogRef = this.matDialog.open(TransactionInfoComponent, {
+    const { _id, ...currencyPayload } = this.selectedAccountCurrency;
+    const transactionDialogRef = this.matDialog.open(TransactionInfoComponent, {
       data: { ...transaction, ...currencyPayload },
       ...PRIMARY_DIALOG_CONFIG,
     });
@@ -104,10 +104,13 @@ export class MainComponent implements OnInit {
   }
 
   public openCreateTransactionDialog(): void {
-    let transactionDialogRef = this.matDialog.open(CreateTransactionComponent, {
-      data: this.selectedAccountId,
-      ...PRIMARY_DIALOG_CONFIG,
-    });
+    const transactionDialogRef = this.matDialog.open(
+      CreateTransactionComponent,
+      {
+        data: this.selectedAccountId,
+        ...PRIMARY_DIALOG_CONFIG,
+      }
+    );
     transactionDialogRef
       .afterClosed()
       .pipe(untilDestroyed(this))
@@ -119,7 +122,7 @@ export class MainComponent implements OnInit {
   }
 
   public openCreateAccountDialog(): void {
-    let accountDialogRef = this.matDialog.open(CreateAccountComponent, {
+    const accountDialogRef = this.matDialog.open(CreateAccountComponent, {
       data: this.selectedAccountId,
       ...PRIMARY_DIALOG_CONFIG,
     });

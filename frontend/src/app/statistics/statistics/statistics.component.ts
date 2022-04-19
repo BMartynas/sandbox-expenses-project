@@ -76,7 +76,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   public generateTable(): void {
-    let { start, end } = this.dateRange.value;
+    const { start, end } = this.dateRange.value;
 
     this.totalExpenses =
       this.statisticsService.getTotalExpenses(this.transactions, start, end) +

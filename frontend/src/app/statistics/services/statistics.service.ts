@@ -13,12 +13,12 @@ export class StatisticsService {
     start: Date,
     end: Date
   ): number {
-    let filteredTransactions: ITransaction[] = this.filterTransactions(
+    const filteredTransactions: ITransaction[] = this.filterTransactions(
       transactions,
       start,
       end
     );
-    let totalExpenses = filteredTransactions.reduce(
+    const totalExpenses = filteredTransactions.reduce(
       (acc, trans) => acc + trans.amount,
       0
     );
@@ -30,18 +30,22 @@ export class StatisticsService {
     start: Date,
     end: Date
   ): ICategoriesStatistics[] {
-    let totalExpenses: number = this.getTotalExpenses(transactions, start, end);
-    let filteredExpenses: ITransaction[] = this.filterTransactions(
+    const totalExpenses: number = this.getTotalExpenses(
       transactions,
       start,
       end
     );
-    let statistics: ICategoriesStatistics[] = [];
+    const filteredExpenses: ITransaction[] = this.filterTransactions(
+      transactions,
+      start,
+      end
+    );
+    const statistics: ICategoriesStatistics[] = [];
 
     for (let expense of filteredExpenses) {
       expense.categories.forEach((category) => {
         if (statistics.some((stat) => stat.category === category.title)) {
-          let objIndex = statistics.findIndex(
+          const objIndex = statistics.findIndex(
             (obj) => obj.category == category.title
           );
           statistics[objIndex].amount += expense.amount;

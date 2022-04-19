@@ -50,7 +50,7 @@ export class CategoryComponent implements OnInit {
   }
 
   public onDelete(): void {
-    let deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
+    const deleteDialogRef = this.matDialog.open(DeleteNotificationComponent, {
       data: ItemToDelete.Category,
       ...CONFIRMATION_DIALOG_CONFIG,
     });
