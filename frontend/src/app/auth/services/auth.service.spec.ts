@@ -8,6 +8,11 @@ import { AuthService } from './auth.service';
 describe('AuthService', () => {
   let service: AuthService;
   let httpController: HttpTestingController;
+  const expectedResult = {
+    token: 'Bearer token',
+    expiresIn: '30m',
+    fullName: 'Name Surname',
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
@@ -20,12 +25,6 @@ describe('AuthService', () => {
   });
 
   it('should return some data', (done: DoneFn) => {
-    const expectedResult = {
-      token: 'Bearer token',
-      expiresIn: '30m',
-      fullName: 'Name Surname',
-    };
-
     service.login('email', 'password').subscribe({
       next: (result) => {
         expect(result).toEqual(expectedResult);
@@ -43,12 +42,6 @@ describe('AuthService', () => {
 
   it('should call setSession on success', (done: DoneFn) => {
     spyOn(service as any, 'setSession');
-
-    const expectedResult = {
-      token: 'Bearer token',
-      expiresIn: '30m',
-      fullName: 'Name Surname',
-    };
 
     service.login('email', 'password').subscribe(() => {
       expect((service as any).setSession).toHaveBeenCalledOnceWith(
