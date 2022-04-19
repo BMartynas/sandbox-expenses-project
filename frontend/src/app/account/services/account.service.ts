@@ -11,14 +11,14 @@ import { ICurrency } from 'src/app/shared/models/currency.model';
 export class AccountService {
   public accounts: IAccount[] = [];
   public selectedAccount!: IAccount;
-  private selectedAccountTransactions$: Subject<string> = new Subject<string>();
+  private selectedAccount$: Subject<string> = new Subject<string>();
   private accountsChange$: Subject<boolean> = new Subject<boolean>();
   private url: string = APP_CONFIG.api.url;
 
   constructor(private http: HttpClient) {}
 
-  public getTransactionsObservable(): Observable<string> {
-    return this.selectedAccountTransactions$.asObservable();
+  public getSelectedAccountObservable(): Observable<string> {
+    return this.selectedAccount$.asObservable();
   }
 
   public getAccountsChangeObservable(): Observable<boolean> {
@@ -68,6 +68,6 @@ export class AccountService {
 
   public selectAccount(_id: string): void {
     this.selectedAccount = this.accounts.find((acc) => acc._id === _id)!;
-    this.selectedAccountTransactions$.next(_id);
+    this.selectedAccount$.next(_id);
   }
 }

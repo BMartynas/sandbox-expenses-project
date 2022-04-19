@@ -11,9 +11,11 @@ import { MatCardModule } from '@angular/material/card';
 import { TransactionButtonComponent } from './transaction-button/transaction-button.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { DeleteNotificationComponent } from './delete-notification/delete-notification.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,9 @@ import { DeleteNotificationComponent } from './delete-notification/delete-notifi
     MatDialogModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
   ],
   exports: [
     MatButtonModule,
@@ -49,6 +54,9 @@ import { DeleteNotificationComponent } from './delete-notification/delete-notifi
     ReactiveFormsModule,
     MatSelectModule,
     DeleteNotificationComponent,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
   ],
 })
 export class SharedModule {}

@@ -1,0 +1,51 @@
+<div class="statistics">
+    <div class="statistics__accounts">
+        <app-account *ngFor="let account of accounts; let i = index; trackBy:trackBy" [account]="account">
+        </app-account>
+    </div>
+
+    <div class="statistics__main-part">
+        <div class="statistics__radio-buttons">
+            <button (click)="selectStatistics('categories')" type="button" [ngClass]="selectedStatistics === 'categories' ? 'selected' : 'not-selected'">
+                <p class="statistics__type-text">
+                    Categories Statistics
+                </p>
+            </button>
+            <button (click)="selectStatistics('monthly')" type="button" [ngClass]="selectedStatistics === 'monthly' ? 'selected' : 'not-selected'"
+            class="statistics__monthly-button">
+                <p class="statistics__type-text">
+                    Monthly Statistics
+                </p>
+            </button>
+        </div>
+
+        <mat-form-field appearance="fill" class="statistics___range-picker">
+            <mat-label>Date Range</mat-label>
+            <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange">
+              <input matStartDate formControlName="start" placeholder="Start Date">
+              <input matEndDate formControlName="end" (ngModelChange)="generateTable()" placeholder="End Date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <div *ngIf="totalExpenses !== ''">
+            <mat-form-field  appearance="fill" class="statistics__total-expenses">
+                <mat-label>Total expenses</mat-label>
+                <input matInput [(ngModel)]="totalExpenses" readonly>
+            </mat-form-field>
+
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>% in total</th>
+                </tr>
+                <tr *ngFor="let stat of CategoriesStatistics">
+                    <td>{{stat.category}}</td>
+                    <td>{{stat.amount}} {{selectedAccountCurrency.symbol}}</td>
+                    <td>{{stat.totalShare}}%</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -11,6 +11,7 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { LayoutModule } from './layout/layout.module';
 import { ErrorInterceptor } from './error/error.interceptor';
 import { CategoriesModule } from './categories/categories.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { CategoriesModule } from './categories/categories.module';
     AuthModule,
     MainModule,
     CategoriesModule,
+    StatisticsModule,
     LayoutModule,
     HttpClientModule,
     AppRoutingModule,

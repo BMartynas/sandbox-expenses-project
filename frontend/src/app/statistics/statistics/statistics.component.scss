@@ -1,0 +1,102 @@
+@use "src/colors" as colors;
+
+.statistics {
+    background: colors.$background-primary;
+    height: 100%;
+    display: flex;
+    margin-top: 3.1rem;
+    padding-right: 2.625rem;
+
+    &__main-part {
+        margin-left: 16rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__accounts {
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-left: 2.625rem;
+    }
+
+    &__radio-buttons {
+        display: flex;
+        margin-bottom: 2.5rem;
+
+        button {
+            width: 14.465rem;
+            height: 3.063rem;
+            display: flex;
+            align-items: center;
+            border-radius: 0.625rem;
+            background: colors.$white;
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__monthly-button {
+        margin-left: -1rem;
+        padding-left: 2rem;
+    }
+
+    &__type-text {
+        font-size: 1.25rem;
+    }
+
+    &__range-picker {
+        width: 28.465rem;
+    }
+
+    &__total-expenses {
+        color: colors.$expense;
+    }
+}
+
+table {
+    background: colors.$table-header;
+    border-radius: 0.625rem 0.625rem 0 0;
+    color: colors.$text-primary;
+    width: 27.93rem;
+}
+
+tr:not(:first-child){
+    background: colors.$white;
+}
+
+tr:last-child{
+    border-radius: 0 0 0.625rem 0.625rem;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+.selected {
+    border: 2px solid colors.$button-border-selected;
+    color: colors.$text-primary;
+    z-index: 11;
+}
+
+.not-selected {
+    border: 1px solid colors.$button-border-not-selected;
+    color: colors.$text-secondary;
+    z-index: 10;
+}
+
+:host ::ng-deep mat-form-field {
+    width: 27.93rem;
+    
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+:host ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: colors.$white;
+    border-radius: 0.625rem;
+}

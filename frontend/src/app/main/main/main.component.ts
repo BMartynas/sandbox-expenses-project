@@ -42,7 +42,7 @@ export class MainComponent implements OnInit {
         },
       });
     this.accountsService
-      .getTransactionsObservable()
+      .getSelectedAccountObservable()
       .pipe(untilDestroyed(this))
       .subscribe({
         next: (selectedAccountId) => {
