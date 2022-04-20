@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { switchMap, combineLatest } from 'rxjs';
 import { AccountService } from 'src/app/account/services/account.service';
 import { IAccount } from 'src/app/shared/models/account.model';
 import { ICurrency } from 'src/app/shared/models/currency.model';
@@ -36,34 +37,22 @@ export class StatisticsComponent implements OnInit {
   public ngOnInit(): void {
     this.accountsService
       .getAccounts()
-      .pipe(untilDestroyed(this))
-      .subscribe({
-        next: (accounts) => {
+      .pipe(
+        switchMap((accounts) => {
           this.accounts = accounts;
-        },
-      });
-    this.accountsService
-      .getSelectedAccountObservable()
+          return this.accountsService.getSelectedAccountObservable();
+        }),
+        switchMap((selectedAccountId) =>
+          combineLatest([
+            this.transactionsService.getTransactions(selectedAccountId),
+            this.accountsService.getAccountCurrency(selectedAccountId),
+          ])
+        )
+      )
       .pipe(untilDestroyed(this))
-      .subscribe({
-        next: (selectedAccountId) => {
-          this.transactionsService
-            .getTransactions(selectedAccountId)
-            .pipe(untilDestroyed(this))
-            .subscribe({
-              next: (transactions) => {
-                this.transactions = transactions;
-              },
-            });
-          this.accountsService
-            .getAccountCurrency(selectedAccountId)
-            .pipe(untilDestroyed(this))
-            .subscribe({
-              next: (currency) => {
-                this.selectedAccountCurrency = currency;
-              },
-            });
-        },
+      .subscribe(([transactions, currency]) => {
+        this.transactions = transactions;
+        this.selectedAccountCurrency = currency;
       });
   }
 
@@ -77,7 +66,6 @@ export class StatisticsComponent implements OnInit {
 
   public generateTable(): void {
     const { start, end } = this.dateRange.value;
-
     this.totalExpenses =
       this.statisticsService.getTotalExpenses(this.transactions, start, end) +
       this.selectedAccountCurrency.symbol;
