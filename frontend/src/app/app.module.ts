@@ -9,6 +9,9 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { LayoutModule } from './layout/layout.module';
+import { ErrorInterceptor } from './error/error.interceptor';
+import { CategoriesModule } from './categories/categories.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +20,8 @@ import { LayoutModule } from './layout/layout.module';
     SharedModule,
     AuthModule,
     MainModule,
+    CategoriesModule,
+    StatisticsModule,
     LayoutModule,
     HttpClientModule,
     AppRoutingModule,
@@ -26,6 +31,11 @@ import { LayoutModule } from './layout/layout.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

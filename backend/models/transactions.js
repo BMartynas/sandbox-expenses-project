@@ -15,17 +15,22 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Title is required!'],
   },
-  category: {
-    type: mongoose.ObjectId,
-    ref: 'Category',
-    required: [true, 'Category is required!'],
-  },
+  categories: [
+    {
+      type: mongoose.ObjectId,
+      ref: 'Category',
+      required: [true, 'Category is required!'],
+    },
+  ],
   description: {
     type: String,
   },
   dateOfTransaction: {
     type: Date,
     required: [true, 'Date of transaction is required!'],
+  },
+  payee: {
+    type: String,
   },
   amount: {
     type: Number,

@@ -1,0 +1,30 @@
+<form [formGroup]="createAccountForm" (ngSubmit)="onCreate()" class="create-account">
+    <div class="create-account__main-content">
+        <div class="create-account__header">
+            <h2 class="create-account__header-text">Create Account</h2>
+            <button  mat-dialog-close class="create-account__close-button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+        <mat-form-field class="create-account__input" appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput  formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="create-account__input" appearance="outline">
+            <mat-label>Currency</mat-label>
+            <mat-select formControlName="currency">
+                <mat-option *ngFor="let currency of currencies" [value]="currency._id">
+                    {{ currency.code }}({{ currency.symbol }})
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="create-account__input" appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput  formControlName="description">
+        </mat-form-field>
+    </div>
+    <div class="create-account__action-buttons">
+        <button mat-button mat-dialog-close class="text">Cancel</button>
+        <button type="submit" class="create-account__save-button text">Create</button>
+    </div>
+</form> 

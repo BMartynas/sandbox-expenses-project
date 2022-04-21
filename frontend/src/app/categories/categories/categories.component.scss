@@ -1,0 +1,21 @@
+@use "src/colors" as colors;
+
+.categories {
+    background: colors.$background-primary;
+    height: 100%;
+    display: flex;
+    margin-top: 3.1rem;
+    justify-content: space-between;
+    padding-right: 2.625rem;
+
+    &__main-part {
+        padding-top: 0;
+        margin-bottom: 0;
+        padding-left: 2.625rem;
+    }
+
+    &__items {
+        display: flex;
+        flex-wrap: wrap
+    }
+}

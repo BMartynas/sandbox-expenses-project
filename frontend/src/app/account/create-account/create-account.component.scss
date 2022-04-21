@@ -1,0 +1,67 @@
+@use "src/colors" as colors;
+
+.create-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2.1rem;
+    }
+
+    &__header-text {
+        margin-bottom: 0;
+        font-size: 2rem;
+        line-height: 2.563rem;
+    }
+
+    &__close-button {
+        border: none;
+        background-color: colors.$button-background-primary;
+        cursor: pointer;
+
+        mat-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 2.298rem;
+            height: 2.298rem;
+        }
+    }
+
+    &__close-button:hover {
+        background-color: colors.$button-hover;
+    }
+
+    &__input {
+        width: 32.5rem;
+        border-radius: 1px solid red;
+        background: transparent;
+
+    }
+
+    &__action-buttons {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            width: 6.25rem;
+            height: 3.125rem;
+            border: none;
+            border-radius: 0.625rem;
+        }
+    }
+
+    &__save-button {
+        background-color: colors.$button-primary;
+    }
+}
+
+.text {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+}

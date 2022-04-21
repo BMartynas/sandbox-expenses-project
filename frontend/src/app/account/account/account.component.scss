@@ -23,6 +23,12 @@
         color: colors.$account-amount;
     }
 
+    &__items-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     &__currency {
         display: flex;
         justify-content: center;

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get('/', accountsController.getAll);
 router.get('/:id', accountsController.getOne);
+router.get('/currency/:id', accountsController.getCurrency);
 router.post('/', accountsController.create);
 router.put('/:id', accountsController.update);
 router.delete('/:id', accountsController.remove);

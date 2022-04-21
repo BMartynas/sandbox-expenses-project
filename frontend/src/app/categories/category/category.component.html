@@ -1,0 +1,18 @@
+<div class="category" [ngClass]="category.type === 'expenses' ? 'expense' : 'income'">
+    <form [formGroup]="editCategoryForm" (ngSubmit)="onUpdate()" class="category__form">
+        <mat-form-field class="category__input" appearance="legacy" >
+            <input matInput  formControlName="title" >
+        </mat-form-field>
+        <button *ngIf="!editing; else confirmEdit" type="button" (click)="onEditClick()" >
+            <mat-icon>edit</mat-icon>
+        </button>
+        <ng-template #confirmEdit>
+            <button  type="submit">
+                <mat-icon>done</mat-icon>
+            </button>
+        </ng-template>
+        <button>
+            <mat-icon (click)="onDelete()">delete</mat-icon>
+        </button>
+    </form>
+</div>

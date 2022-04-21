@@ -3,7 +3,10 @@
         <mat-card-content class="account__name">{{account.name}}</mat-card-content>
         <mat-card-title class="account__amount">{{account.amount}}</mat-card-title>
     </div>
-    <mat-card-content class="account__currency">{{account.currency}}</mat-card-content>
+    <div class="account__items-container">
+        <mat-card-content class="account__currency">{{account.currency.symbol}}</mat-card-content>
+        <mat-icon (click)="openAccountInfo()">visibility</mat-icon>
+    </div>
 </mat-card>
 
  

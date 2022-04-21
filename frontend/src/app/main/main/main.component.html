@@ -5,7 +5,9 @@
     </div>
 
     <div class="main__transactions">
-        <app-transaction *ngFor="let transaction of (transactions$ | async); let i = index; trackBy:trackBy" [transaction]="transaction">
+        <app-transaction *ngFor="let transaction of transactions; let i = index; trackBy:trackBy"
+         [transaction]="transaction"
+         (click)="openTransactionDialog(transaction)">
         </app-transaction>
     </div>
 
@@ -18,9 +20,12 @@
         </app-transaction-button>
         <app-add-button
             text="Add Transaction"
+            (click)="openCreateTransactionDialog()"
         ></app-add-button>
         <app-add-button
             text="Add Account"
+            (click)="openCreateAccountDialog()"
         ></app-add-button>
     </div>
 </main>
+<app-deleted-notification *ngIf="showDeletedTransactionNotification"></app-deleted-notification>

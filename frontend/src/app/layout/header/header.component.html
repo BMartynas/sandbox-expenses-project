@@ -4,7 +4,7 @@
     </div>
     <div class="header__links-container">
         <a [routerLink]="link" *ngFor="let link of links" (click)="activeLink = link" [ngClass]="activeLink === link ? 'active-link' : ''"  class="header__link">
-            {{ link }} 
+            {{ link.charAt(0).toUpperCase() + link.slice(1) }} 
         </a>
     </div>
       <button mat-button [matMenuTriggerFor]="menu">

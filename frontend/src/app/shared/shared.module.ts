@@ -10,12 +10,19 @@ import { AddButtonComponent } from './add-button/add-button.component';
 import { MatCardModule } from '@angular/material/card';
 import { TransactionButtonComponent } from './transaction-button/transaction-button.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { DeleteNotificationComponent } from './delete-notification/delete-notification.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
     AddButtonComponent,
     TransactionButtonComponent,
     NotFoundComponent,
+    DeleteNotificationComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +33,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatToolbarModule,
     MatMenuModule,
     MatCardModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
   ],
   exports: [
     MatButtonModule,
@@ -37,6 +50,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
     AddButtonComponent,
     TransactionButtonComponent,
     MatCardModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    DeleteNotificationComponent,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
   ],
 })
 export class SharedModule {}
