@@ -8,7 +8,7 @@
                 {{transaction.title}}
             </mat-card-content>
             <mat-card-content [ngClass]="transaction.type === 'income' ? 'income-amount' : 'expense-amount'">
-                {{transaction.type === 'income' ? '' : '-'}}{{transaction.amount}}
+                {{transaction.type === 'income' ? '' : '-'}}{{transaction?.amount}}{{currency?.symbol}} 
             </mat-card-content>
         </div>
         <div class="transaction__info">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ICategory } from 'src/app/shared/models/category.model';
 import { CategoryService } from '../services/category.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -16,6 +17,10 @@ export class CategoriesComponent implements OnInit {
   public categories!: ICategory[];
   public filteredCategories!: ICategory[];
   public filterType: string = '';
+  public showDeletedNotification: boolean = false;
+  public searchForm: FormGroup = new FormGroup({
+    searchTerm: new FormControl(''),
+  });
 
   constructor(
     private categoriesService: CategoryService,
@@ -68,8 +73,25 @@ export class CategoriesComponent implements OnInit {
   }
 
   public filterCategories(): void {
+    const { searchTerm } = this.searchForm.value;
     this.filteredCategories = this.categories.filter(
-      (category) => category.type !== this.filterType
+      (category) =>
+        category.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        category.type !== this.filterType
     );
+  }
+
+  public onDeletedCategory(id: string): void {
+    this.filteredCategories = this.categories.filter(
+      (category) => category._id !== id
+    );
+    this.showDeletedNotification = true;
+    this.hideNotification();
+  }
+
+  private hideNotification(): void {
+    setTimeout(() => {
+      this.showDeletedNotification = false;
+    }, 5000);
   }
 }

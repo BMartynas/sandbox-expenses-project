@@ -9,9 +9,32 @@
     padding-right: 2.625rem;
 
     &__accounts {
-    padding-top: 0;
-    margin-bottom: 0;
-    padding-left: 2.625rem;
+        padding-top: 0;
+        margin-bottom: 0;
+        padding-left: 2.625rem;
+        width: 55rem;
+        overflow-y: auto;
+    }
+
+    &__accounts::-webkit-scrollbar { 
+        display: none;
+    }
+
+    &__search {
+        width: 40.5rem;
+    }
+
+    &__search-input {
+        line-height: 1.7rem;
+        font-size: 1.125rem;
+        color: colors.$form-input;
+        margin-left: 0.8rem;
+    }
+
+    &__search-icon {
+        transform: scale(1.5);
+        color: colors.$form-input;
+        opacity: 0.9;
     }
 
     &__transactions {
@@ -20,4 +43,21 @@
         flex-direction: column;
         align-items: center;
     }
+
+    &__transaction-items {
+        overflow-y: auto;
+    }
+
+    &__transaction-items::-webkit-scrollbar { 
+        display: none;
+    }
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+:host ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: colors.$transaction-background;
+    border-radius: 0.625rem;
 }

@@ -43,8 +43,9 @@
         </mat-form-field>
         <mat-form-field class="edit-transaction__input" appearance="outline">
             <mat-label>Payment Date</mat-label>
-            <input type="date" 
-            matInput  formControlName="dateOfTransaction">
+            <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="dateOfTransaction">
+            <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="edit-transaction__input" appearance="outline">
             <mat-label>Payee</mat-label>

@@ -1,4 +1,5 @@
 import Account from '../models/accounts.js';
+import Transaction from '../models/transactions.js';
 
 export default class AccountsService {
   static async getAccounts(userId) {
@@ -7,17 +8,18 @@ export default class AccountsService {
   }
 
   static async getAccount(accountId, userId) {
-    const account = await Account.findOne({ id: accountId, userId }).populate(
-      'currency'
-    );
+    const account = await Account.findOne()
+      .where('_id')
+      .in(accountId)
+      .populate('currency');
     return account;
   }
 
   static async getAccountCurrency(accountId, userId) {
-    const { currency } = await Account.findOne({
-      id: accountId,
-      userId,
-    }).populate('currency');
+    const { currency } = await Account.findOne()
+      .where('_id')
+      .in(accountId)
+      .populate('currency');
     return currency;
   }
 
@@ -39,6 +41,9 @@ export default class AccountsService {
     const deletedAccount = await Account.findOneAndDelete({
       _id: accountId,
       userId,
+    });
+    await Transaction.deleteMany({
+      accountId,
     });
     return deletedAccount;
   }

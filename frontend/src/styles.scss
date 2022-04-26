@@ -19,3 +19,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     color: colors.$text-primary;
     box-shadow: none;
 }
+
+.custom-notification-dialog-container .mat-dialog-container {
+    border-radius: 0.625rem;
+    background-color: colors.$dialog-background;
+    width: 39rem;
+    padding: 1.438rem 1.563rem 0 1.563rem;
+    color: colors.$text-primary;
+    box-shadow: none;
+}

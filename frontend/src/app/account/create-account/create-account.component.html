@@ -13,7 +13,7 @@
         <mat-form-field class="create-account__input" appearance="outline">
             <mat-label>Currency</mat-label>
             <mat-select formControlName="currency">
-                <mat-option *ngFor="let currency of currencies" [value]="currency._id">
+                <mat-option *ngFor="let currency of data" [value]="currency._id">
                     {{ currency.code }}({{ currency.symbol }})
                 </mat-option>
             </mat-select>

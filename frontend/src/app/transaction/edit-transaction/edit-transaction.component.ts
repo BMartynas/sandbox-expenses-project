@@ -20,6 +20,7 @@ export class EditTransactionComponent implements OnInit, OnDestroy {
   public selectedCategory!: string;
   public categories!: ICategory[];
   public categoriesByType!: ICategory[];
+  public maxDate: Date = new Date();
 
   public editTransactionForm: FormGroup = new FormGroup({
     title: new FormControl(this.data.title, [Validators.required]),

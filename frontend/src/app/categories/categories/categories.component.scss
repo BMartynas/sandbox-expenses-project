@@ -18,4 +18,30 @@
         display: flex;
         flex-wrap: wrap
     }
+
+    &__search {
+        width: 40.5rem;
+    }
+
+    &__search-input {
+        line-height: 1.7rem;
+        font-size: 1.125rem;
+        color: colors.$form-input;
+        margin-left: 0.8rem;
+    }
+
+    &__search-icon {
+        transform: scale(1.5);
+        color: colors.$form-input;
+        opacity: 0.9;
+    }
+}
+
+.categories__search ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+:host ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: colors.$transaction-background;
+    border-radius: 0.625rem;
 }

@@ -10,13 +10,12 @@ export const login = async (req, res) => {
     const user = await UsersService.getUserByEmail(email);
 
     if (token) {
-      res
-        .status(StatusCodes.OK)
-        .json({
-          token,
-          expiresIn: process.env.JWT_EXPIRES_IN,
-          fullName: `${user.firstName} ${user.lastName}`,
-        });
+      res.status(StatusCodes.OK).json({
+        token,
+        expiresIn: process.env.JWT_EXPIRES_IN,
+        fullName: `${user.firstName} ${user.lastName}`,
+        country: user.country,
+      });
     } else {
       res
         .status(StatusCodes.UNAUTHORIZED)

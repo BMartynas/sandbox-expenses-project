@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Observable, tap } from 'rxjs';
+import { Subject, Observable, tap, switchMap } from 'rxjs';
 import { IAccount } from 'src/app/shared/models/account.model';
 import { APP_CONFIG } from 'src/app/app.config';
 import { ICurrency } from 'src/app/shared/models/currency.model';
+import { TransactionService } from 'src/app/transaction/services/transaction.service';
+import { ITransaction } from 'src/app/shared/models/transaction.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +17,10 @@ export class AccountService {
   private accountsChange$: Subject<boolean> = new Subject<boolean>();
   private url: string = APP_CONFIG.api.url;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private transactionsService: TransactionService
+  ) {}
 
   public getSelectedAccountObservable(): Observable<string> {
     return this.selectedAccount$.asObservable();
@@ -52,7 +57,6 @@ export class AccountService {
   }
 
   public deleteAccount(id: string): Observable<IAccount[]> {
-    this.accountsChange$.next(true);
     return this.http.delete<IAccount[]>(`${this.url}/accounts/${id}`);
   }
 
@@ -69,5 +73,17 @@ export class AccountService {
   public selectAccount(_id: string): void {
     this.selectedAccount = this.accounts.find((acc) => acc._id === _id)!;
     this.selectedAccount$.next(_id);
+  }
+
+  public calculateTotalAmount(transactions: ITransaction[]): number {
+    let total: number = 0;
+    for (const transaction of transactions) {
+      if (transaction.type === 'expenses') {
+        total -= transaction.amount;
+      } else {
+        total += transaction.amount;
+      }
+    }
+    return total;
   }
 }

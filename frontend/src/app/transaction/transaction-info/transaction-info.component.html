@@ -37,17 +37,20 @@
             <h4 class="text bold-text">Payment date:</h4>
             <p class="text">{{ data.dateOfTransaction | date:'d.MM.yyyy'}}</p>
         </div>
-        <div class="horizontal-line"></div>
+        
         <div *ngIf="data.payee">
+            <div class="horizontal-line"></div>
             <div class="row">
                 <h4 class="text bold-text">Payee:</h4>
                 <p class="text">{{ data.payee }}</p>
             </div>
-            <div class="horizontal-line"></div>
         </div>
-        <div *ngIf="data.description" class="row">
-            <h4 class="text bold-text">Description:</h4>
-            <p class="text">{{ data.description }}</p>
+        <div *ngIf="data.description">
+            <div class="horizontal-line"></div>
+            <div class="row">
+                <h4 class="text bold-text">Description:</h4>
+                <p class="text">{{ data.description }}</p>
+            </div>
         </div>        
     </div>
     
