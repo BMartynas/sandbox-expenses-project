@@ -1,7 +1,7 @@
 <mat-card class="account" [ngClass]="{active: account._id === accountsService.selectedAccount?._id}" (click)="onAccountClick(account._id)">
     <div>
         <mat-card-content class="account__name">{{account.name}}</mat-card-content>
-        <mat-card-title class="account__amount">{{account.amount}}</mat-card-title>
+        <mat-card-title class="account__amount">{{totalAmount}}</mat-card-title>
     </div>
     <div class="account__items-container">
         <mat-card-content class="account__currency">{{account.currency.symbol}}</mat-card-content>

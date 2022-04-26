@@ -14,3 +14,9 @@ export const CONFIRMATION_DIALOG_CONFIG = {
   panelClass: ['custom-confirmation-dialog-container'],
   disableClose: true,
 };
+
+export const NOTIFICATION_DIALOG_CONFIG = {
+  height: '11.5rem',
+  panelClass: ['custom-notification-dialog-container'],
+  disableClose: true,
+};

@@ -7,12 +7,12 @@
             <mat-icon>edit</mat-icon>
         </button>
         <ng-template #confirmEdit>
-            <button  type="submit">
+            <button  type="submit" [disabled]="editCategoryForm.controls['title'].errors">
                 <mat-icon>done</mat-icon>
             </button>
         </ng-template>
-        <button>
-            <mat-icon (click)="onDelete()">delete</mat-icon>
+        <button type="button" (click)="onDelete()">
+            <mat-icon>delete</mat-icon>
         </button>
     </form>
 </div>

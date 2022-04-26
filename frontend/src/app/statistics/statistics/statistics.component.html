@@ -28,24 +28,47 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
-        <div *ngIf="totalExpenses !== ''">
-            <mat-form-field  appearance="fill" class="statistics__total-expenses">
-                <mat-label>Total expenses</mat-label>
-                <input matInput [(ngModel)]="totalExpenses" readonly>
-            </mat-form-field>
+        <div *ngIf="totalExpenses !== '' && selectedStatistics === 'categories'">
+            <div *ngIf="categoriesStatistics.length > 0; else noData">
+                <mat-form-field  appearance="fill" class="statistics__total-expenses">
+                    <mat-label>Total expenses</mat-label>
+                    <input matInput [(ngModel)]="totalExpenses" readonly>
+                </mat-form-field>
 
-            <table>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>% in total</th>
+                    </tr>
+                    <tr *ngFor="let stat of categoriesStatistics">
+                        <td>{{stat.category}}</td>
+                        <td>{{stat.amount}} {{selectedAccountCurrency.symbol}}</td>
+                        <td>{{stat.totalShare}}%</td>
+                    </tr>
+                </table>
+            </div>
+            <ng-template #noData><span class="statistics__no-data">There is no data to be displayed!</span></ng-template>
+        </div>
+        <div *ngIf="monthlyStatistics && selectedStatistics === 'monthly'">
+            <div *ngIf="monthlyStatistics.length > 0; else noData">
+            <table class="statistics__monthly">
                 <tr>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th>% in total</th>
+                    <th>Month and year</th>
+                    <th>Income</th>
+                    <th>Expenses</th>
+                    <th>Savings</th>
+                    <th>% of savings</th>
                 </tr>
-                <tr *ngFor="let stat of categoriesStatistics">
-                    <td>{{stat.category}}</td>
-                    <td>{{stat.amount}} {{selectedAccountCurrency.symbol}}</td>
-                    <td>{{stat.totalShare}}%</td>
+                <tr *ngFor="let stat of monthlyStatistics">
+                    <td>{{stat.date}}</td>
+                    <td>{{stat.income}} {{selectedAccountCurrency.symbol}}</td>
+                    <td>{{stat.expenses}} {{selectedAccountCurrency.symbol}}</td>
+                    <td [ngClass]="stat.savings > 0 ? 'income' : 'expense'">{{stat.savings}} {{selectedAccountCurrency.symbol}}</td>
+                    <td [ngClass]="stat.savingsShare > 0 ? 'income' : 'expense'">{{stat.savingsShare}}%</td>
                 </tr>
             </table>
         </div>
+        <ng-template #noData><span class="statistics__no-data">There is no data to be displayed!</span></ng-template>
     </div>
 </div>

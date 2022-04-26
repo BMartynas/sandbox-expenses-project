@@ -1,8 +1,16 @@
 <div class="categories">
     <div class="categories__main-part">
+        <form [formGroup]="searchForm">
+            <mat-form-field appearance="fill" class="categories__search">
+                <mat-icon matPrefix class="categories__search-icon">search</mat-icon>
+                <input matInput type="search" placeholder="Search" 
+                (input)="filterCategories()" class="categories__search-input" formControlName="searchTerm">
+            </mat-form-field>
+        </form>
         <div class="categories__items">
             <app-category 
-                *ngFor="let category of filteredCategories; let i = index; trackBy: trackBy" [category]="category">
+                *ngFor="let category of filteredCategories; let i = index; trackBy: trackBy"
+                 [category]="category" (successfullyDeleted)="onDeletedCategory($event)">
             </app-category>
         </div>
     </div>
@@ -10,11 +18,13 @@
     <div class="categories__buttons">
         <app-transaction-button
             (click)="onFilter('expenses')" 
-            type="Income">
+            type="Income"
+            [filter]="filterType !== '' ? (filterType === 'expenses' ? 'income' : 'expenses') : ''">
         </app-transaction-button>
         <app-transaction-button 
             (click)="onFilter('income')" 
-            type="Expenses">
+            type="Expenses"
+            [filter]="filterType !== '' ? (filterType === 'expenses' ? 'income' : 'expenses') : ''">
         </app-transaction-button>
         <app-add-button
             text="Add Category"
@@ -22,3 +32,4 @@
         ></app-add-button>
     </div>
 </div>
+<app-deleted-notification *ngIf="showDeletedNotification" itemName="Category"></app-deleted-notification>

@@ -6,6 +6,8 @@ import { CategoryComponent } from './category/category.component';
 import { SharedModule } from '../shared/shared.module';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { CreateCategoryComponent } from './create-category/create-category.component';
+import { ExistingComponent } from './existing/existing.component';
+import { UpdateExistingComponent } from './update-existing/update-existing.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,8 @@ const routes: Routes = [
     CategoriesComponent,
     CategoryComponent,
     CreateCategoryComponent,
+    ExistingComponent,
+    UpdateExistingComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
 })

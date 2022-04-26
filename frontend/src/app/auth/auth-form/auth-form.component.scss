@@ -64,7 +64,7 @@
     }
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
     background-color: colors.$form-field-background;
     height: 3.43rem;
     font-size: 1.125rem;

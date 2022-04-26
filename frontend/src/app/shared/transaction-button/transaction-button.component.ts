@@ -7,6 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class TransactionButtonComponent {
   @Input() public type!: string;
+  @Input() public filter!: string;
+  public selected: boolean = true;
 
   constructor() {}
 }

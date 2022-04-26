@@ -1,0 +1,25 @@
+@use "src/colors" as colors;
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.469rem;
+
+    &__title {
+        margin-bottom: 0;
+        font-size: 2rem;
+    }
+
+    &__close-button {
+        cursor: pointer;
+        background-color: colors.$button-background-primary;
+        border: none;
+        width: 2.21rem;
+        height: 2.21rem;
+    }
+}
+
+p {
+    margin-bottom: 1.563rem;
+    font-size: 1.5rem;
+}

@@ -23,6 +23,7 @@ export class AuthService {
     localStorage.setItem('token', res.token);
     localStorage.setItem('expiresAt', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('userFullName', res.fullName);
+    localStorage.setItem('userCountry', res.country);
   }
 
   public isLoggedIn(): boolean {

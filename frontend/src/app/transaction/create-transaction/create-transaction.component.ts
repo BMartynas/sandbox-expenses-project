@@ -19,13 +19,14 @@ export class CreateTransactionComponent implements OnInit, OnDestroy {
   public selectedCategory!: string;
   public categories!: ICategory[];
   public categoriesByType!: ICategory[];
+  public maxDate: Date = new Date();
 
   public createTransactionForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    categories: new FormControl(null, [Validators.required]),
-    amount: new FormControl(0, [Validators.required]),
+    categories: new FormControl('', [Validators.required]),
+    amount: new FormControl(null, [Validators.required]),
     dateOfTransaction: new FormControl(
-      this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+      this.datePipe.transform('', 'dd.mm.YYYY'),
       [Validators.required]
     ),
     payee: new FormControl(''),

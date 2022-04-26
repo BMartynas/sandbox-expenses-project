@@ -12,6 +12,8 @@ import { LayoutModule } from './layout/layout.module';
 import { ErrorInterceptor } from './error/error.interceptor';
 import { CategoriesModule } from './categories/categories.module';
 import { StatisticsModule } from './statistics/statistics.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
+import { ObligatoryModule } from './obligatory/obligatory.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +25,8 @@ import { StatisticsModule } from './statistics/statistics.module';
     CategoriesModule,
     StatisticsModule,
     LayoutModule,
+    SubscriptionsModule,
+    ObligatoryModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -1,22 +1,40 @@
 <main class="main">
     <div class="main__accounts">
-        <app-account *ngFor="let account of (accounts$ | async); let i = index; trackBy:trackBy" [account]="account">
+        <app-account *ngFor="let account of (accounts$ | async); let i = index; trackBy:trackBy"
+         [account]="account"
+         (deleted)="onAccountDelete()">
         </app-account>
     </div>
 
     <div class="main__transactions">
-        <app-transaction *ngFor="let transaction of transactions; let i = index; trackBy:trackBy"
-         [transaction]="transaction"
-         (click)="openTransactionDialog(transaction)">
-        </app-transaction>
+        <form [formGroup]="searchForm">
+            <mat-form-field appearance="fill" class="main__search">
+                <mat-icon matPrefix class="main__search-icon">search</mat-icon>
+                <input matInput type="search" placeholder="Search" 
+                (input)="filterTransactions()" class="main__search-input" formControlName="searchTerm">
+            </mat-form-field>
+        </form>
+        <div class="main__transaction-items">
+            <app-transaction *ngFor="let transaction of filteredTransactions; let i = index; trackBy:trackBy"
+            [transaction]="transaction"
+            [currency]="selectedAccountCurrency"
+            (click)="openTransactionDialog(transaction)">
+            </app-transaction>
+        </div>
     </div>
 
     <div class="main__buttons">
         <app-transaction-button 
-            type="Income">
+            (click)="onFilter('expenses')" 
+            type="Income"
+            [filter]="filterType !== '' ? (filterType === 'expenses' ? 'income' : 'expenses') : ''"
+            >
         </app-transaction-button>
         <app-transaction-button 
-            type="Expenses">
+            (click)="onFilter('income')" 
+            type="Expenses"
+            [filter]="filterType !== '' ? (filterType === 'expenses' ? 'income' : 'expenses') : ''"
+            >
         </app-transaction-button>
         <app-add-button
             text="Add Transaction"
@@ -28,4 +46,4 @@
         ></app-add-button>
     </div>
 </main>
-<app-deleted-notification *ngIf="showDeletedTransactionNotification"></app-deleted-notification>
+<app-deleted-notification *ngIf="showDeletedNotification" [itemName]="deletedItemName"></app-deleted-notification>

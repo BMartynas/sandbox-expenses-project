@@ -30,7 +30,7 @@ export class AuthFormComponent {
         this.router.navigateByUrl('/');
       },
       error: (err) => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.split('Message: ')[1];
       },
     });
   }

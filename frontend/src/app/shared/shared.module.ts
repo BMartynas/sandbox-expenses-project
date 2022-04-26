@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { DeleteNotificationComponent } from './delete-notification/delete-notification.component';
+import { DeletedNotificationComponent } from './deleted-notification/deleted-notification.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
@@ -23,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     TransactionButtonComponent,
     NotFoundComponent,
     DeleteNotificationComponent,
+    DeletedNotificationComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatMenuModule,
     AddButtonComponent,
     TransactionButtonComponent,
+    DeletedNotificationComponent,
     MatCardModule,
     MatDialogModule,
     ReactiveFormsModule,

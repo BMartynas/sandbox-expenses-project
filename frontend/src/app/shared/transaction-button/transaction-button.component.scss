@@ -35,3 +35,7 @@
 .expense-icon {
     background-color: colors.$expense;
 }
+
+.selected {
+    outline: 2px solid black;
+}

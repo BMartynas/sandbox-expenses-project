@@ -4,6 +4,7 @@ import { AccountService } from 'src/app/account/services/account.service';
 import { TransactionService } from 'src/app/transaction/services/transaction.service';
 import { ITransaction } from 'src/app/shared/models/transaction.model';
 import { Observable } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { MatDialog } from '@angular/material/dialog';
 import { TransactionInfoComponent } from 'src/app/transaction/transaction-info/transaction-info.component';
@@ -21,9 +22,16 @@ import { CreateAccountComponent } from 'src/app/account/create-account/create-ac
 export class MainComponent implements OnInit {
   public accounts$!: Observable<IAccount[]>;
   public transactions!: ITransaction[];
-  public showDeletedTransactionNotification: boolean = false;
+  public filteredTransactions!: ITransaction[];
+  public showDeletedNotification: boolean = false;
+  public deletedItemName: string = '';
   private selectedAccountId!: string;
-  private selectedAccountCurrency!: ICurrency;
+  public selectedAccountCurrency!: ICurrency;
+  public filterType: string = '';
+  public currencies!: ICurrency[];
+  public searchForm: FormGroup = new FormGroup({
+    searchTerm: new FormControl(''),
+  });
 
   constructor(
     private accountsService: AccountService,
@@ -51,6 +59,14 @@ export class MainComponent implements OnInit {
           this.getCurrency(selectedAccountId);
         },
       });
+    this.accountsService
+      .getAllCurrencies()
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: (data) => {
+          this.currencies = data;
+        },
+      });
   }
 
   private getAccounts(): void {
@@ -64,6 +80,7 @@ export class MainComponent implements OnInit {
       .subscribe({
         next: (transactions) => {
           this.transactions = transactions;
+          this.filteredTransactions = transactions;
         },
       });
   }
@@ -94,11 +111,14 @@ export class MainComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((data) => {
         if (data.deletedTransaction) {
-          this.showDeletedTransactionNotification = true;
+          this.deletedItemName = 'Transaction';
+          this.showDeletedNotification = true;
           this.removeDeletedAccount(data.transactionId);
           this.hideNotification();
+          this.getAccounts();
         } else if (data.editedTransaction) {
           this.getTransactions(this.selectedAccountId);
+          this.getAccounts();
         }
       });
   }
@@ -117,13 +137,14 @@ export class MainComponent implements OnInit {
       .subscribe((data) => {
         if (data.created) {
           this.getTransactions(this.selectedAccountId);
+          this.getAccounts();
         }
       });
   }
 
   public openCreateAccountDialog(): void {
     const accountDialogRef = this.matDialog.open(CreateAccountComponent, {
-      data: this.selectedAccountId,
+      data: this.currencies,
       ...PRIMARY_DIALOG_CONFIG,
     });
     accountDialogRef
@@ -138,11 +159,33 @@ export class MainComponent implements OnInit {
 
   private hideNotification(): void {
     setTimeout(() => {
-      this.showDeletedTransactionNotification = false;
+      this.showDeletedNotification = false;
     }, 5000);
   }
 
   private removeDeletedAccount(id: string): void {
     this.transactions = this.transactions.filter((trans) => trans._id !== id)!;
+  }
+
+  public onFilter(type: string): void {
+    if (this.filterType === type) this.filterType = '';
+    else this.filterType = type;
+    this.filterTransactions();
+  }
+
+  public filterTransactions(): void {
+    const { searchTerm } = this.searchForm.value;
+    this.filteredTransactions = this.transactions.filter(
+      (trans) =>
+        trans.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        trans.type !== this.filterType
+    );
+  }
+
+  public onAccountDelete(): void {
+    this.deletedItemName = 'Account';
+    this.showDeletedNotification = true;
+    this.hideNotification();
+    this.getAccounts();
   }
 }

@@ -19,6 +19,10 @@
     padding-left: 2.625rem;
     }
 
+    &__no-data {
+        color: colors.$error;
+    }
+
     &__radio-buttons {
         display: flex;
         margin-bottom: 2.5rem;
@@ -53,11 +57,15 @@
     &__total-expenses {
         color: colors.$expense;
     }
+
+    &__monthly tr:nth-last-child(-n+2) td:first-child {
+        font-weight: 700;
+    }
 }
 
 table {
     background: colors.$table-header;
-    border-radius: 0.625rem 0.625rem 0 0;
+    border-radius: 0.625rem;
     color: colors.$text-primary;
     width: 27.93rem;
 }
@@ -66,14 +74,22 @@ tr:not(:first-child){
     background: colors.$white;
 }
 
-tr:last-child{
-    border-radius: 0 0 0.625rem 0.625rem;
+tr:last-child td:first-child{
+    border-radius: 0 0  0 0.625rem;
+}
+
+tr:last-child td:last-child{
+    border-radius: 0 0 0.625rem 0;
 }
 
 td {
     text-align: center;
     vertical-align: middle;
   }
+
+tr {
+    height: 2.11rem;
+}
 
 .selected {
     border: 2px solid colors.$button-border-selected;
@@ -85,6 +101,14 @@ td {
     border: 1px solid colors.$button-border-not-selected;
     color: colors.$text-secondary;
     z-index: 10;
+}
+
+.income {
+    color: colors.$income;
+}
+
+.expense {
+    color: colors.$expense;
 }
 
 :host ::ng-deep mat-form-field {
